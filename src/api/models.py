@@ -35,10 +35,10 @@ class User(db.Model):
     password = db.Column(db.String(80), nullable=False)
     first_name = db.Column(db.String(40), nullable=False)
     last_name = db.Column(db.String(40), nullable=False)
-    phone_number = db.Column(db.String(20), unique=True, nullable=False)  # Cambiado a String con longitud
+    phone_number = db.Column(db.String(20), unique=True, nullable=False)
     city = db.Column(db.String(40), nullable=False)
     country = db.Column(db.String(40), nullable=False)
-    postal_code = db.Column(db.String(20), nullable=False)  # Cambiado a String con longitud
+    postal_code = db.Column(db.String(20), nullable=False)
     registration_date = db.Column(db.DateTime, nullable=True)
     address1 = db.Column(db.String(100), nullable=False)
     address2 = db.Column(db.String(100), nullable=True)
@@ -96,8 +96,8 @@ class Product(db.Model):
 class ProductDetail(db.Model):
     __tablename__ = 'product_detail'
     id = db.Column(db.Integer, primary_key=True)
-    size = db.Column(db.String(20), nullable=False)  # Cambiado a String
-    color = db.Column(db.String(20), nullable=False)  # Cambiado a String
+    size = db.Column(db.String(20), nullable=False)
+    color = db.Column(db.String(20), nullable=False) 
     stock = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
@@ -111,7 +111,7 @@ class ProductDetail(db.Model):
             "stock": self.stock
         }
 
-class ProductImage(db.Model):  # Agregado RL
+class ProductImage(db.Model):
     __tablename__ = 'product_image'
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
@@ -171,7 +171,7 @@ class Order(db.Model):
 class OrderItem(db.Model):
     __tablename__ = 'order_items'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)  # Agregado RL
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
     design_id = db.Column(db.Integer, db.ForeignKey('designs.id'), nullable=True)
