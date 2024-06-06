@@ -6,7 +6,7 @@ from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
-from api.models import db
+from api.models import User, Product, Design, Cart, db
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
@@ -66,6 +66,43 @@ def serve_any_other_file(path):
     response = send_from_directory(static_file_dir, path)
     response.cache_control.max_age = 0  # avoid cache memory
     return response
+
+@app.route('/user', methods=['POST'])
+def create_user():
+    data = request.json  # Obtiene los datos del cuerpo de la solicitud en formato JSON
+    # Extrae los campos del usuario del JSON
+    email = data.get('email')
+    password = data.get('password')
+    first_name = data.get('first_name')
+    last_name = data.get('last_name')
+    phone_number = data.get('phone_number')
+    city = data.get('city')
+    country = data.get('country')
+    postal_code = data.get('postal_code')
+    address1 = data.get('address1')
+    address2 = data.get('address2')
+
+    # Crea una instancia de User con los datos proporcionados
+    new_user = User(email=email, password=password, first_name=first_name, last_name=last_name,
+                    phone_number=phone_number, city=city, country=country, postal_code=postal_code,
+                    address1=address1, address2=address2)
+
+    # Agrega el nuevo usuario a la base de datos
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify(new_user.serialize()), 201  # Devuelve el nuevo usuario creado con el código de estado 201
+
+@app.route('/users', methods=['GET'])
+def get_users():
+    # Consulta todos los usuarios en la base de datos
+    users = User.query.all()
+    
+    # Serializa los usuarios en formato JSON
+    users_json = [user.serialize() for user in users]
+    
+    # Devuelve la respuesta JSON
+    return jsonify(users_json), 200
 
 
 # this only runs if `$ python src/main.py` is executed
