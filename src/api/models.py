@@ -12,21 +12,22 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 class SizeEnum(Enum):
-    SMALL = "small"
-    MEDIUM = "medium"
-    LARGE = "large"
-    XLARGE = "xlarge"
+    SMALL = "SMALL"
+    MEDIUM = "MEDIUM"
+    LARGE = "LARGE"
+    XLARGE = "XLARGE"
 
 class ColorEnum(Enum):
-    RED = "red"
-    BLUE = "blue"
-    GREEN = "green"
-    GRAY = "gray"
-    WHITE = "white"
+    RED = "RED"
+    BLUE = "BLUE"
+    GREEN = "GREEN"
+    GRAY = "GRAY"
+    WHITE = "WHITE"
 
 class StatusEnum(Enum):
-    PENDING = 'pending'
-    COMPLETED = 'completed'
+    PENDING = "PENDING"
+    COMPLETED = "COMPLETED"
+    CANCELED = "CANCELED"
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -88,8 +89,8 @@ class Product(db.Model):
             "price": self.price,
             "description": self.description,
             "image_url": self.image_url,
-            "size": self.size,  
-            "color": self.color, 
+            "size": self.size.name,  
+            "color": self.color.name, 
             "stock": self.stock
         }
 
@@ -153,12 +154,10 @@ class Order(db.Model):
     total_amount = db.Column(db.Numeric(10, 2), nullable=False)
     order_date = db.Column(db.DateTime, nullable=True, default=datetime.now(timezone.utc))
     status = db.Column(db.Enum(StatusEnum), nullable=False)
-
     order_items = db.relationship('OrderItem', backref='order', lazy=True)
-
     def __repr__(self):
         return f'<Order {self.id}>'
-
+    
     def serialize(self):
         return {
             "id": self.id,
@@ -174,7 +173,7 @@ class OrderItem(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
-    design_id = db.Column(db.Integer, db.ForeignKey('designs.id'), nullable=True)
+    design_id = db.Column(db.Integer, db.ForeignKey('designs.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Numeric(10, 2), nullable=False)
 
