@@ -1,21 +1,31 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, Flask
 from api.models import db, User, Product, Design, Order, OrderItem
 from flask_cors import CORS
 from datetime import datetime, timezone, timedelta
-from flask_bcrypt import generate_password_hash, check_password_hash
-import jwt
-
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+import os
 
 api = Blueprint('api', __name__)
 CORS(api)
-bcrypt = Bcrypt()
-SECRET_KEY = "your_secret_key_here"
 
 @api.before_app_request
 def create_tables():
     db.create_all()
 
+#Enpoint Login
+
+@api.route("/token", methods=["POST"])
+def create_token():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    user = User.query.filter_by(email = email, password = password).first()
+    user = user.serialize()
+    token = create_access_token(identity = user['id'])
+    
+    return jsonify({ 'token': token, 'user': user}),200
+
 # Endpoints para User
+
 @api.route('/users', methods=['GET'])
 def get_users():
     users = User.query.all()
@@ -29,10 +39,9 @@ def get_user(id):
 @api.route('/user', methods=['POST'])
 def create_user():
     data = request.get_json()
-    hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
     new_user = User(
         email=data['email'],
-        password=hashed_password,
+        password=data['password'],
         first_name=data['first_name'],
         last_name=data['last_name'],
         phone_number=data['phone_number'],
@@ -46,28 +55,6 @@ def create_user():
     db.session.add(new_user)
     db.session.commit()
     return jsonify(new_user.serialize()), 201
-
-#Endpoint POST de Login
-
-@api.route('/user/login', methods=['POST'])
-def login():
-    data = request.get_json()
-    email = data.get('email')
-    password = data.get('password')
-
-    if not email or not password:
-        return jsonify({"error": "Missing email or password"}), 400
-
-    user = User.query.filter_by(email=email).first()
-
-    if not user or not bcrypt.check_password_hash(user.password, password):
-        return jsonify({"error": "Invalid email or password"}), 401
-
-    # Crear un token JWT con una duración de 24 horas
-    expiration_date = datetime.now(timezone.utc) + timedelta(days=1)
-    jwt_token = jwt.encode({'user_id': user.id, 'exp': expiration_date}, SECRET_KEY, algorithm='HS256')
-
-    return jsonify({"token": jwt_token.decode('utf-8')}), 200
 
 @api.route('/user/<int:id>', methods=['PUT'])
 def update_user(id):

@@ -22,6 +22,7 @@ bcrypt = "*"
 flask-bcrypt = "*"
 flask-jwt-extended = "*"
 pyjwt = "*"
+werkzeug = "*"
 
 [requires]
 python_version = "3.10"
