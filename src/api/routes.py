@@ -27,9 +27,12 @@ def create_token():
 # Endpoints para User
 
 @api.route('/users', methods=['GET'])
+@jwt_required()
 def get_users():
-    users = User.query.all()
-    return jsonify([user.serialize() for user in users])
+    id_user = get_jwt_identity()
+    user = User.query.get(id_user)
+    serialized_user = user.serialize()  # Llama serialize() en la instancia particular de User
+    return jsonify({ 'user': serialized_user })
 
 @api.route('/user/<int:id>', methods=['GET'])
 def get_user(id):
