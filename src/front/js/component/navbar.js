@@ -2,18 +2,45 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
-	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
-				</div>
-			</div>
-		</nav>
-	);
+  return (
+    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <div className="container-fluid">
+        <a className="navbar-brand" href="#">
+          <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="CreaTuTee" width="30" height="24"/>
+        </a>
+
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+          <ul className="navbar-nav mb-2 mb-lg-0">
+            <li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="#">Desing your shirt</a>
+            </li>
+			<li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="#">How it Works</a>
+            </li>
+			<li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="#">ECO Friendly</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">About us</a>
+            </li>
+            <li className="nav-item dropdown">
+              {/* Dropdown items here */}
+            </li>
+            <li className="nav-item">
+              {/* Other items here */}
+            </li>
+          </ul>
+		  
+        </div>
+		<form className="d-flex" role="search">
+        
+        <button className="btn btn-outline-success" type="submit">Login</button>
+      </form>
+      </div>
+    </nav>
+  );
 };

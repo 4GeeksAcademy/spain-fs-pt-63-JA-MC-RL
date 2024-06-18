@@ -4,9 +4,12 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
+import Login from "./pages/login";
+import Profile from "./pages/profile";
+import Cart from "./pages/cart";
+import Desing from "./pages/desing";
+import Checkout from "./pages/checkout";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -26,8 +29,11 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
-                        <Route element={<Demo />} path="/demo" />
-                        <Route element={<Single />} path="/single/:theid" />
+                        <Route element={<Login />} path="/login" />
+                        <Route element={<Checkout />} path="/checkout" />
+                        <Route element={<Desing />} path="/desing" />
+                        <Route element={<Cart />} path="/cart" />
+                        <Route element={<Profile />} path="/profile" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
