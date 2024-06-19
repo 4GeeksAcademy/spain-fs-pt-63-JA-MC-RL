@@ -1,115 +1,106 @@
-import React, { useState, useContext } from "react";
-import { Context } from "../store/appContext"; // Ajusta la ruta según tu estructura de archivos
-import { useNavigate } from "react-router-dom"; // Importa useNavigate para navegación programática
-import "./cart.css";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import './cart.css'; // Ajusta la ruta según la ubicación real de cart.css
 
 const Cart = () => {
-    const { store, actions } = useContext(Context);
-    const navigate = useNavigate(); // Hook para navegar programáticamente
+    const [quantity, setQuantity] = useState(1);
+    const [selectedColor, setSelectedColor] = useState('');
+    const [selectedSize, setSelectedSize] = useState('');
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
-    // Estados para manejar los campos del formulario
-    const [userId, setUserId] = useState("");
-    const [orderId, setOrderId] = useState("");
-    const [productId, setProductId] = useState("");
-    const [designId, setDesignId] = useState("");
-    const [quantity, setQuantity] = useState("");
-    const [price, setPrice] = useState("");
-    const [message, setMessage] = useState("");
+    useEffect(() => {
+        // Obtener el producto seleccionado desde localStorage (simulando la navegación desde Design.js)
+        const storedProduct = JSON.parse(localStorage.getItem('selectedProduct'));
+        if (storedProduct) {
+            setSelectedProduct(storedProduct);
+            setSelectedColor(storedProduct.color);
+            setSelectedSize(storedProduct.size);
+            setQuantity(storedProduct.quantity);
+        }
+    }, []); // Vacío para que se ejecute solo una vez al montar el componente
 
-    // Función para manejar el envío del formulario
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    // Función para actualizar la cantidad del producto
+    const handleQuantityChange = (event) => {
+        const newQuantity = parseInt(event.target.value, 10);
+        setQuantity(newQuantity);
+    };
 
-        // Datos a enviar
-        const data = {
-            user_id: parseInt(userId),
-            order_id: parseInt(orderId),
-            product_id: parseInt(productId),
-            design_id: parseInt(designId),
-            quantity: parseInt(quantity),
-            price: parseFloat(price),
+    // Función para actualizar el color seleccionado del producto
+    const handleColorChange = (event) => {
+        setSelectedColor(event.target.value);
+    };
+
+    // Función para actualizar la talla seleccionada del producto
+    const handleSizeChange = (event) => {
+        setSelectedSize(event.target.value);
+    };
+
+    // Función para guardar los cambios realizados en el producto
+    const updateProduct = () => {
+        const updatedProduct = {
+            ...selectedProduct,
+            quantity: quantity,
+            color: selectedColor,
+            size: selectedSize
         };
 
-        // Llamada a la acción para crear el order item
-        const success = await actions.createOrderItem(data);
-
-        if (success) {
-            setMessage("Order item created successfully!");
-            // Redirige a la página de Checkout después de crear el item del pedido
-            navigate("/checkout");
-        } else {
-            setMessage("Failed to create order item.");
-        }
+        localStorage.setItem('selectedProduct', JSON.stringify(updatedProduct));
+        alert('Producto actualizado correctamente.');
+        setSelectedProduct(updatedProduct); // Actualizar estado local también si es necesario
     };
 
     return (
-        <div className="cart-form">
-            <h2>Cart</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="user_id">User ID</label>
-                    <input
-                        type="number"
-                        id="user_id"
-                        value={userId}
-                        onChange={(e) => setUserId(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="order_id">Order ID</label>
-                    <input
-                        type="number"
-                        id="order_id"
-                        value={orderId}
-                        onChange={(e) => setOrderId(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="product_id">Product ID</label>
-                    <input
-                        type="number"
-                        id="product_id"
-                        value={productId}
-                        onChange={(e) => setProductId(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="design_id">Design ID</label>
-                    <input
-                        type="number"
-                        id="design_id"
-                        value={designId}
-                        onChange={(e) => setDesignId(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="quantity">Quantity</label>
+        <div className="cart-view">
+            <h1>Carrito de Compras</h1>
+            {selectedProduct ? (
+                <div className="selected-product">
+                    <img src={selectedProduct.image_urls[selectedColor]} alt={selectedProduct.name} />
+                    <h2>{selectedProduct.name}</h2>
+                    <p>{selectedProduct.description}</p>
+                    <p>Precio: ${selectedProduct.price}</p>
+
+                    {/* Selector de cantidad */}
+                    <label htmlFor="quantity">Cantidad:</label>
                     <input
                         type="number"
                         id="quantity"
+                        name="quantity"
+                        min="1"
                         value={quantity}
-                        onChange={(e) => setQuantity(e.target.value)}
-                        required
+                        onChange={handleQuantityChange}
                     />
+
+                    {/* Selector de color */}
+                    <label htmlFor="color">Color:</label>
+                    <select id="color" name="color" value={selectedColor} onChange={handleColorChange}>
+                        <option value="GREEN">Verde</option>
+                        <option value="BLUE">Azul</option>
+                        <option value="RED">Rojo</option>
+                    </select>
+
+                    {/* Selector de talla */}
+                    <label htmlFor="size">Talla:</label>
+                    <select id="size" name="size" value={selectedSize} onChange={handleSizeChange}>
+                        <option value="SMALL">S</option>
+                        <option value="MEDIUM">M</option>
+                        <option value="LARGE">L</option>
+                    </select>
+
+                    {/* Botón para actualizar el producto */}
+                    <button className="update-button" onClick={updateProduct}>
+                        Actualizar Producto
+                    </button>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="price">Price</label>
-                    <input
-                        type="number"
-                        id="price"
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                        step="0.01"
-                        required
-                    />
-                </div>
-                <button type="submit">Create Order Item</button>
-            </form>
-            {message && <p>{message}</p>}
+            ) : (
+                <p>No hay productos en el carrito.</p>
+            )}
+
+            {/* Botón para ir a Checkout */}
+            {selectedProduct && (
+                <Link to="/checkout">
+                    <button className="checkout-button">Ir a Checkout</button>
+                </Link>
+            )}
         </div>
     );
 };

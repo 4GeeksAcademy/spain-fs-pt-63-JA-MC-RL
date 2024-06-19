@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, Flask
 from api.models import db, User, Product, Design, Order, OrderItem
 from flask_cors import CORS
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 import os
 
@@ -12,27 +12,29 @@ CORS(api)
 def create_tables():
     db.create_all()
 
-#Enpoint Login
-
+# Enpoint Login
 @api.route("/token", methods=["POST"])
 def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    user = User.query.filter_by(email = email, password = password).first()
-    user = user.serialize()
-    token = create_access_token(identity = user['id'])
-    
-    return jsonify({ 'token': token, 'user': user}),200
+    user = User.query.filter_by(email=email, password=password).first()
+    if not user:
+        return jsonify({"error": "Invalid credentials"}), 401
+
+    user_data = user.serialize()
+    token = create_access_token(identity=user.id)
+    return jsonify({'token': token, 'user': user_data}), 200
 
 # Endpoints para User
-
 @api.route('/users', methods=['GET'])
 @jwt_required()
 def get_users():
     id_user = get_jwt_identity()
     user = User.query.get(id_user)
-    serialized_user = user.serialize()  # Llama serialize() en la instancia particular de User
-    return jsonify({ 'user': serialized_user })
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    return jsonify({'user': user.serialize()})
 
 @api.route('/user/<int:id>', methods=['GET'])
 def get_user(id):
@@ -148,7 +150,7 @@ def get_order_by_id(id):
         order_data = order.serialize()
         order_data['status'] = order_data['status'].value
         return jsonify(order_data), 200
-    return jsonify({'message': 'Pedido no encontrado'}), 404
+    return jsonify({'message': 'Order not found'}), 404
 
 @api.route('/order', methods=['POST'])
 def create_order():
@@ -156,17 +158,17 @@ def create_order():
     try:
         user_id = int(data['user_id'])
     except ValueError:
-        return jsonify({'error': 'El valor de user_id no es un entero válido'}), 400
+        return jsonify({'error': 'Invalid user_id'}), 400
 
     new_order = Order(
         user_id=user_id,
         total_amount=data['total_amount'],
-        order_date=data.get('order_date'),
+        order_date=data.get('order_date', datetime.now(timezone.utc)),
         status=data['status']
     )
     db.session.add(new_order)
     db.session.commit()
-    return jsonify({'message': 'Pedido creado exitosamente'}), 201
+    return jsonify({'message': 'Order created successfully'}), 201
 
 # Endpoints para OrderItem
 @api.route('/order-items', methods=['GET'])

@@ -3,10 +3,12 @@ const getState = ({ getStore, getActions, setStore }) => {
         store: {
             message: null,
             token: localStorage.getItem('token') || null,
-            user: null
+            user: null,
+            products: [],
+            cart: []
         },
         actions: {
-            // Acción para obtener un mensaje desde el backend
+            // Obtener mensaje desde el backend
             getMessage: async () => {
                 try {
                     const resp = await fetch(process.env.BACKEND_URL + "/api/hello");
@@ -21,7 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-            // Acción para iniciar sesión
+            // Iniciar sesión
             login: async ({ email, password }) => {
                 try {
                     const resp = await fetch(`${process.env.BACKEND_URL}/api/token`, {
@@ -38,8 +40,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                     const data = await resp.json();
                     const token = data.token;
+                    const user = data.user;
 
-                    setStore({ token });
+                    setStore({ token, user });
                     localStorage.setItem('token', token);
 
                     return true;
@@ -49,7 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-            // Acción para registrar un nuevo usuario
+            // Registrar nuevo usuario
             register: async ({ email, password, firstName, lastName, phoneNumber, city, country, postalCode, address1, address2 }) => {
                 try {
                     const resp = await fetch(`${process.env.BACKEND_URL}/api/user`, {
@@ -88,7 +91,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-            // Acción para actualizar el perfil del usuario
+            // Actualizar perfil del usuario
             updateProfile: async (userData) => {
                 try {
                     const resp = await fetch(`${process.env.BACKEND_URL}/api/user/${userData.id}`, {
@@ -128,13 +131,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-            // Acción para cerrar sesión
+            // Cerrar sesión
             logout: () => {
                 localStorage.removeItem('token');
-                setStore({ token: null });
+                setStore({ token: null, user: null });
             },
 
-            // Acción para crear un nuevo elemento de pedido
+            // Crear nuevo elemento de pedido
             createOrderItem: async ({ user_id, order_id, product_id, design_id, quantity, price }) => {
                 try {
                     const token = getStore().token;
@@ -163,6 +166,61 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return true;
                 } catch (error) {
                     console.log("Error creating order item:", error);
+                    return false;
+                }
+            },
+
+            // Obtener productos
+            getProducts: async () => {
+                try {
+                    const resp = await fetch(`${process.env.BACKEND_URL}/api/products`);
+                    if (!resp.ok) {
+                        throw new Error("Failed to fetch products");
+                    }
+                    const data = await resp.json();
+                    setStore({ products: data });
+                    return data;
+                } catch (error) {
+                    console.log("Error fetching products:", error);
+                    return [];
+                }
+            },
+
+            // Agregar producto al carrito
+            addToCart: (product) => {
+                const store = getStore();
+                setStore({ cart: [...store.cart, product] });
+            },
+
+            // Eliminar producto del carrito
+            removeFromCart: (productId) => {
+                const store = getStore();
+                const updatedCart = store.cart.filter(item => item.id !== productId);
+                setStore({ cart: updatedCart });
+            },
+
+            // Crear pedido
+            createOrder: async (orderData) => {
+                try {
+                    const token = getStore().token;
+                    const resp = await fetch(`${process.env.BACKEND_URL}/api/order`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(orderData)
+                    });
+
+                    if (!resp.ok) {
+                        throw new Error("Failed to create order");
+                    }
+
+                    const data = await resp.json();
+                    console.log("Order created:", data);
+                    return true;
+                } catch (error) {
+                    console.log("Error creating order:", error);
                     return false;
                 }
             }

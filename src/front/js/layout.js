@@ -11,6 +11,7 @@ import Cart from "./pages/cart";
 import Desing from "./pages/desing";
 import Checkout from "./pages/checkout";
 import Register from "./pages/register";
+import Payment from "./pages/payment";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -36,6 +37,7 @@ const Layout = () => {
                         <Route element={<Cart />} path="/cart" />
                         <Route element={<Profile />} path="/profile" />
                         <Route element={<Register />} path="/register" />
+                        <Route element={<Payment />} path="/payment" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
