@@ -147,7 +147,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${token}`
                         },
-                        body: JSON.stringify({ 
+                        body: JSON.stringify({
                             user_id,
                             order_id,
                             product_id,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './cart.css'; // Ajusta la ruta según la ubicación real de cart.css
+import './../../styles/cart.css'; // Ajusta la ruta según la ubicación real de cart.css
 
 const Cart = () => {
     const [quantity, setQuantity] = useState(1);

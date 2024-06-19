@@ -10,10 +10,10 @@ const Login = () => {
 
     const handleLogin = async () => {
         const isAuthenticated = await actions.login({ email: email, password: password });
-
+        console.log("autenticated", isAuthenticated)
         // Si la autenticación es exitosa, redirige a la ruta "home"
         if (isAuthenticated) {
-            navigate('/home'); // Reemplaza "/home" con la ruta adecuada en tu aplicación
+            navigate('/'); // Reemplaza "/home" con la ruta adecuada en tu aplicación
         } else {
             // Manejar el error, mostrar mensaje, etc.
             console.log("Login failed");

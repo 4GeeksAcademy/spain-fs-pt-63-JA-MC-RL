@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "./desing.css"
+import "./../../styles/desing.css"
+import { Logo } from "./../component/logos.js";
 
 const Design = () => {
     const [products, setProducts] = useState([]);
@@ -142,6 +143,7 @@ const Design = () => {
             <button onClick={addToCart} disabled={!selectedProduct}>
                 Agregar al Carrito
             </button>
+            <Logo />
         </div>
     );
 };

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'; // Importa Link desde react-router-dom
+import './../../styles/checkout.css';
 
 const Checkout = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
