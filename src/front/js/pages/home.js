@@ -2,38 +2,82 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import carrusel from "./../../img/carrusel.jpg";
+import carrusel2 from "../../img/carrusel2.0.jpg";
+import carrusel3 from "../../img/carrusel3.jpg";
+import creatutee from "./../../img/creatutee.jpg";
+
 
 export const Home = () => {
     const { store, actions } = useContext(Context);
 
     return (
         <div className="text-center mt-3">
-            <div className="jumbotron bg-secondary text-white d-flex align-items-center" style={{height: '300px'}}>
-                <div className="container">
-                    <h1 className="display-4">VIDEO</h1>
+            <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="true">
+                <div className="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div className="carousel-inner">
+                    <div className="carousel-item active">
+                        <img src={carrusel} className="d-block w-100" alt="First slide" />
+                    </div>
+                    <div className="carousel-item">
+                        <img src={carrusel2} className="d-block w-100" alt="Second slide" />
+                    </div>
+                    <div className="carousel-item">
+                        <img src={carrusel3} className="d-block w-100" alt="Third slide" />
+                    </div>
+                </div>
+                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Previous</span>
+                </button>
+                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Next</span>
+                </button>
+            </div>
+
+            <div id="services" className="container-fluid bg-white">
+                <div className="row justify-content-center mt-5">
+                    <div className="col-md-12 col-lg-4 p-4 text-center">
+                        <img src="https://static.vecteezy.com/system/resources/previews/011/059/397/non_2x/team-work-text-button-speech-bubble-team-work-colorful-web-banner-illustration-vector.jpg" className="rounded-circle imagenredonda img-responsive" alt="Tesla Logo" />
+                    </div>
+                    <div className="col-md-12 col-lg-8">
+                        <div className="ps-5 pt-5 pe-5 mb-0 d-flex">
+                            <p className="fs-2 fw-medium mb-1">
+                                TEAM WORK &nbsp;
+                            </p>
+                            <p className="mb-1 fs-2 fw-medium text-body-tertiary">Is pretty cool too.</p>
+                        </div>
+                        <div className="ps-5 pe-5 mt-0">
+                            <p className="fw-light">"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+                                "No hay nadie que ame el dolor mismo, que lo busque, lo encuentre y lo quiera, simplemente porque es el dolor."
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div id="first_heading" className="container-fluid bg-white">
+            <div id="first_heading" className="container">
                 <div className="row justify-content-center mt-5">
                     <div className="col-md-12 col-lg-8">
                         <div className="ps-5 pt-5 pe-5 mb-0 d-flex">
                             <p className="fs-2 fw-medium mb-1">
-                                This First Heading &nbsp;
+                                ECO friendly &nbsp;
                             </p>
-                            <p className="mb-1 fs-2 fw-medium text-body-tertiary"> Will Catch Your Eyes.</p>
+                            <p className="mb-1 fs-2 fw-medium text-body-tertiary">100% Cuida tu planeta.</p>
                         </div>
                         <div className="ps-5 pe-5 mt-0">
-                            <p className="fw-light">El Piloto automático permite que su coche se conduzca, acelere y frene
-                                automáticamente
-                                dentro de su carril bajo su supervisión activa, asistiendo en las partes más aburridas de la conducción.
-                                Con las actualizaciones de software inalámbricas, las últimas mejoras están disponibles al instante.
+                            <p className="fw-light">"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+                                "No hay nadie que ame el dolor mismo, que lo busque, lo encuentre y lo quiera, simplemente porque es el dolor."
                             </p>
                         </div>
                     </div>
                     <div className="col-md-12 col-lg-4 p-4 text-center">
-                        <img src="https://www.experimenta.es/wp-content/uploads/2018/10/tesla-logo.jpg"
-                             className="rounded-circle imagenredonda img-responsive" alt="Tesla Logo"/>
+                        <img src="https://static.vecteezy.com/system/resources/previews/002/694/750/non_2x/eco-friendly-seal-stamp-free-vector.jpg" className="rounded-circle imagenredonda img-responsive" alt="Eco Friendly" />
                     </div>
                 </div>
             </div>
@@ -41,60 +85,52 @@ export const Home = () => {
             <div id="services" className="container-fluid bg-white">
                 <div className="row justify-content-center mt-5">
                     <div className="col-md-12 col-lg-4 p-4 text-center">
-                        <img src="https://images1.autocasion.com/actualidad/wp-content/uploads/2017/03/Qu%C3%A9-significa-el-logo-de-Tesla.jpg"
-                             className="rounded-circle imagenredonda img-responsive" alt="Tesla Logo"/>
+                        <img src="https://static.vecteezy.com/system/resources/previews/007/933/018/non_2x/about-us-button-about-us-text-template-for-website-about-us-icon-flat-style-vector.jpg" className="rounded-circle imagenredonda img-responsive" alt="About Us" />
                     </div>
                     <div className="col-md-12 col-lg-8">
                         <div className="ps-5 pt-5 pe-5 mb-0 d-flex">
                             <p className="fs-2 fw-medium mb-1">
-                                This Second Heading &nbsp;
+                                About us &nbsp;
                             </p>
-                            <p className="mb-1 fs-2 fw-medium text-body-tertiary">Is pretty cool too.</p>
+                            <p className="mb-1 fs-2 fw-medium text-body-tertiary">Explora y crea tu TEE</p>
                         </div>
                         <div className="ps-5 pe-5 mt-0">
-                            <p className="fw-light">El Model 3 se beneficia de las mismas características que hacen que
-                                nuestros vehículos sean tan seguros: faldones laterales que absorben la energía, un paquete de
-                                baterías
-                                reforzado instalado en la parte baja del vehículo para reducir el riesgo de vuelco y una
-                                estructura de
-                                carrocería de metal que puede soportar un peso mucho mayor que el del propio coche.
+                            <p className="fw-light">"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+                                "No hay nadie que ame el dolor mismo, que lo busque, lo encuentre y lo quiera, simplemente porque es el dolor."
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
+            <div className="container-fluid bg-white">
+                Payment methods - Our GuaranTee - Shipping Worldwide
+            </div>
+            <div className="container-fluid bg-white">
+                <img src="creatutee.jpg" alt="CreaTuTee" width="200" height="200"/>
+                <h1>Customer support</h1>
+    <ul>
+        <li>Need help?</li>
+        <li>Contac us</li>
+        <li>+0 55 555 5555</li>
+    </ul>
+    <h1>Company</h1>
+    <ul>
+        <li>How it Works</li>
+        <li>ECO friendly</li>
+        <li>About Us</li>
+        <li>Terms and Conditions</li>
+    </ul>
+    <h1>Follow us</h1>
+    <ul>
+        <li>Instagram</li>
+        <li>Facebook</li>
+        <li>Twitter</li>
+        <li>Pinterest</li>
+        <li>YouTube</li>
+    </ul>
 
-            <div id="first_heading" className="container-fluid bg-white">
-                <div className="row justify-content-center mt-5">
-                    <div className="col-md-12 col-lg-8">
-                        <div className="ps-5 pt-5 pe-5 mb-0 d-flex">
-                            <p className="fs-2 fw-medium mb-1">
-                                This First Heading &nbsp;
-                            </p>
-                            <p className="mb-1 fs-2 fw-medium text-body-tertiary"> Will Catch Your Eyes.</p>
-                        </div>
-                        <div className="ps-5 pe-5 mt-0">
-                            <p className="fw-light">El Piloto automático permite que su coche se conduzca, acelere y frene
-                                automáticamente
-                                dentro de su carril bajo su supervisión activa, asistiendo en las partes más aburridas de la conducción.
-                                Con las actualizaciones de software inalámbricas, las últimas mejoras están disponibles al instante.
-                            </p>
-                        </div>
-                    </div>
-                    <div className="col-md-12 col-lg-4 p-4 text-center">
-                        <img src="https://www.experimenta.es/wp-content/uploads/2018/10/tesla-logo.jpg"
-                             className="rounded-circle imagenredonda img-responsive" alt="Tesla Logo"/>
-                    </div>
-                </div>
             </div>
 
-            <div className="alert alert-info">
-                {store.message || "Loading message from the backend (make sure your python backend is running)..."}
-            </div>
-            <p>
-                This boilerplate comes with lots of documentation:{" "}
-                <a href="https://start.4geeksacademy.com/starters/react-flask">Read more</a>
-            </p>
         </div>
     );
 };

@@ -11,3 +11,19 @@
     height: 150px;
     width: 150px;
 }
+
+.carousel-inner {
+    max-height: 600px;
+    object-fit: cover;
+}
+
+.carousel-item {
+    max-height: 600px;
+    object-fit: cover;
+}
+
+.carousel-item {
+    max-height: 600px;
+    object-fit: cover;
+}
+
