@@ -6,6 +6,7 @@ import carrusel from "./../../img/carrusel.jpg";
 import carrusel2 from "../../img/carrusel2.0.jpg";
 import carrusel3 from "../../img/carrusel3.jpg";
 import creatutee from "./../../img/creatutee.jpg";
+import { FaApplePay } from "react-icons/fa6";
 
 
 export const Home = () => {
@@ -104,6 +105,9 @@ export const Home = () => {
             </div>
             <div className="container-fluid bg-white">
                 Payment methods - Our GuaranTee - Shipping Worldwide
+                <p className="pago"> 
+                <FaApplePay />
+                </p>
             </div>
             <div className="container-fluid bg-white">
                 <img src="creatutee.jpg" alt="CreaTuTee" width="200" height="200"/>
