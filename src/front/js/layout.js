@@ -10,6 +10,8 @@ import Profile from "./pages/profile";
 import Cart from "./pages/cart";
 import Desing from "./pages/desing";
 import Checkout from "./pages/checkout";
+import Register from "./pages/register";
+import Payment from "./pages/payment";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -28,15 +30,17 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
-                        <Route element={<Home />} path="/" />
+                        <Route element={<Home />} path="/home" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<Checkout />} path="/checkout" />
                         <Route element={<Desing />} path="/desing" />
                         <Route element={<Cart />} path="/cart" />
                         <Route element={<Profile />} path="/profile" />
+                        <Route element={<Register />} path="/register" />
+                        <Route element={<Payment />} path="/payment" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
-                    <Footer />
+                
                 </ScrollToTop>
             </BrowserRouter>
         </div>
