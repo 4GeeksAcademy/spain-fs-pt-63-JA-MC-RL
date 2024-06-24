@@ -1,49 +1,97 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import creatutee from "./../../img/creatutee.jpg";
+import { Link, useNavigate } from "react-router-dom";
+import CreaTuTeeLogo from "../../img/creatutee.jpg";
+import './../../styles/navbar.css';  
 
 export const Navbar = () => {
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
-      <div className="container-fluid bg-ligth ms-4">
-        <a className="navbar-brand" href="#">
-          <img src="creatutee.jpg" alt="CreaTuTee" width="75" height="75"/>
-          <span className="ms-3 text-dark fw-bold">CreaTuTee</span>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light w-100">
+      <div className="container w-100">
+        {/* Logo y título */}
+        <div className="navbar-left">
+          <Link to="/" className="navbar-brand">
+            <img src={CreaTuTeeLogo} alt="CreaTuTee" className="navbar-logo" />
+            <span className="navbar-title">CreaTuTee</span>
+          </Link>
+        </div>
 
-
-        </a>
-
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        {/* Botón para colapsar en dispositivos móviles */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarContent"
+          aria-controls="navbarContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-  <ul className="navbar-nav mb-2 mb-lg-0">
-    <li className="nav-item me-4">
-      <a className="nav-link active text-dark" aria-current="page" href="#">Desing your shirt</a>
-    </li>
-    <li className="nav-item me-4">
-      <a className="nav-link active text-dark" aria-current="page" href="#">How it Works</a>
-    </li>
-    <li className="nav-item me-4">
-      <a className="nav-link active text-dark" aria-current="page" href="#">ECO Friendly</a>
-    </li>
-    <li className="nav-item me-4">
-      <a className="nav-link text-dark" href="#">About us</a>
-    </li>
-    <li className="nav-item dropdown me-3">
-      {/* Dropdown items here */}
-    </li>
-    <li className="nav-item">
-      {/* Other items here */}
-    </li>
-  </ul>
-</div>
+        {/* Elementos del navbar */}
+        <div className="collapse navbar-collapse" id="navbarContent">
+          <ul className="navbar-nav mx-auto navbar-center">
+            <li className="nav-item">
+              <Link to="/home" className="nav-link">Home</Link>
+            </li>
+            <li className="nav-item">
+              <a href="./desing" className="nav-link">DiseñaTuTee</a>
+            </li>
+            <li className="nav-item">
+              <a href="#how-it-works" className="nav-link">Cómo funciona</a>
+            </li>
+            <li className="nav-item">
+              <a href="#eco-friendly" className="nav-link">EcoFriendly</a>
+            </li>
+            <li className="nav-item">
+              <a href="#about-us" className="nav-link">Acerca de nosotros</a>
+            </li>
+          </ul>
 
-		<form className="d-flex" role="search">
-        
-        <button className="btn btn-outline-success" type="submit">Login</button>
-      </form>
+          {/* Opciones a la derecha */}
+          <ul className="navbar-nav ml-auto navbar-right">
+            {token ? (
+              <>
+                <li className="nav-item">
+                  <Link to="/profile" className="nav-link">
+                    <i className="fas fa-user"></i> Profile
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/cart" className="nav-link">
+                    <i className="fas fa-shopping-cart"></i> Cart
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <button onClick={handleLogout} className="btn btn-link nav-link">
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link to="/login" className="btn btn-success nav-link">
+                    <i className="fas fa-sign-in-alt"></i> Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+    <Link to="/register" className="btn btn-outline-success nav-link">
+        Register
+    </Link>
+</li>
+              </>
+            )}
+          </ul>
+        </div>
       </div>
     </nav>
   );
