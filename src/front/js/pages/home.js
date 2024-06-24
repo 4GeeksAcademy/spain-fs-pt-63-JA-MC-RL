@@ -51,11 +51,10 @@ export const Home = () => {
                             <p className="fs-2 fw-medium mb-1">
                                 TEAM WORK &nbsp;
                             </p>
-                            <p className="mb-1 fs-2 fw-medium text-body-tertiary">Is pretty cool too.</p>
+                            <p className="mb-1 fs-2 fw-medium text-body-tertiary">Is pretty cool.</p>
                         </div>
                         <div className="ps-5 pe-5 mt-0">
-                            <p className="fw-light">"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
-                                "No hay nadie que ame el dolor mismo, que lo busque, lo encuentre y lo quiera, simplemente porque es el dolor."
+                            <p className="fw-light">"Un grupo se convierte en un equipo cuando cada miembro está lo suficientemente seguro de sí mismo y de su contribución como para alabar las habilidades de los demás"
                             </p>
                         </div>
                     </div>
@@ -105,36 +104,64 @@ export const Home = () => {
             </div>
             <div className="container-fluid bg-white">
                 Payment methods - Our GuaranTee - Shipping Worldwide
-                <p className="pago"> 
-                <FaApplePay />
+                <p className="pago">
+                    <FaApplePay />
                 </p>
             </div>
-            <div className="container-fluid bg-white">
-                <img src="creatutee.jpg" alt="CreaTuTee" width="200" height="200"/>
-                <h1>Customer support</h1>
-    <ul>
-        <li>Need help?</li>
-        <li>Contac us</li>
-        <li>+0 55 555 5555</li>
-    </ul>
-    <h1>Company</h1>
-    <ul>
-        <li>How it Works</li>
-        <li>ECO friendly</li>
-        <li>About Us</li>
-        <li>Terms and Conditions</li>
-    </ul>
-    <h1>Follow us</h1>
-    <ul>
-        <li>Instagram</li>
-        <li>Facebook</li>
-        <li>Twitter</li>
-        <li>Pinterest</li>
-        <li>YouTube</li>
-    </ul>
 
-            </div>
+            <div className="container-fluid bg-secondary">
+                <div className="row">
+                    <div className="col-3">
+                        <img src="creatutee.jpg" alt="CreaTuTee" width="200" height="200" />
+                        </div>
+                        <div className="col-3">
+                            <h1>Customer support</h1>
+                            <ul>
+                                <li>Need help?</li>
+                                <li>Contac us</li>
+                                <li>+0 55 555 5555</li>
+                            </ul>
+                            </div>
+                            <div className="col-3">
+                                <h1>Company</h1>
+                                <ul>
+                                    <li>How it Works</li>
+                                    <li>ECO friendly</li>
+                                    <li>About Us</li>
+                                    <li>Terms and Conditions</li>
+                                </ul>
+                                </div>
+                                <div className="col-3">
+                                    <h1>Follow us</h1>
+                                    <ul>
+                                        <li>Instagram</li>
+                                        <li>Facebook</li>
+                                        <li>Twitter</li>
+                                        <li>Pinterest</li>
+                                        <li>YouTube</li>
+                                    </ul>
+                                    <div />
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        </div>
+                        );
+};
+
+
+<div className="container">
+    <div className="row">
+        <div className="col-4">
 
         </div>
-    );
-};
+        <div className="col-4">
+
+        </div>
+        <div className="col-4">
+
+        </div>
+    </div>
+</div>
