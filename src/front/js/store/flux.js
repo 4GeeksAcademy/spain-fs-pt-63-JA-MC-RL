@@ -5,7 +5,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             token: localStorage.getItem('token') || null,
             user: null,
             products: [],
-            cart: []
+            cart: [],
+            customImages: []
         },
         actions: {
             // Obtener mensaje desde el backend
@@ -33,24 +34,25 @@ const getState = ({ getStore, getActions, setStore }) => {
                         },
                         body: JSON.stringify({ email, password })
                     });
-
+        
                     if (!resp.ok) {
                         throw new Error("Login failed");
                     }
-
+        
                     const data = await resp.json();
                     const token = data.token;
                     const user = data.user;
-
-                    setStore({ token, user });
+        
+                    setStore({ token, user }); // Actualiza el estado global con el token y el usuario
                     localStorage.setItem('token', token);
-
+        
                     return true;
                 } catch (error) {
-                    console.log("Error during login:", error);
+                    console.error("Error during login:", error);
                     return false;
                 }
             },
+            
 
             // Registrar nuevo usuario
             register: async ({ email, password, firstName, lastName, phoneNumber, city, country, postalCode, address1, address2 }) => {
@@ -94,42 +96,39 @@ const getState = ({ getStore, getActions, setStore }) => {
             // Actualizar perfil del usuario
             updateProfile: async (userData) => {
                 try {
-                    const resp = await fetch(`${process.env.BACKEND_URL}/api/user/${userData.id}`, {
+                    const store = getStore();
+                    const userId = store.user.id;  // Asegúrate de que estás obteniendo el id del usuario de manera correcta
+            
+                    const resp = await fetch(`${process.env.BACKEND_URL}/api/user/${userId}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${getStore().token}`
+                            'Authorization': `Bearer ${store.token}`  // Asegúrate de que el token es correcto
                         },
                         body: JSON.stringify(userData)
                     });
-
+            
                     if (!resp.ok) {
                         throw new Error('Failed to update profile');
                     }
-
+            
                     const updatedUserData = await resp.json();
-
+            
                     setStore(prevState => ({
                         ...prevState,
                         user: {
                             ...prevState.user,
-                            first_name: updatedUserData.first_name,
-                            last_name: updatedUserData.last_name,
-                            phone_number: updatedUserData.phone_number,
-                            city: updatedUserData.city,
-                            country: updatedUserData.country,
-                            postal_code: updatedUserData.postal_code,
-                            address1: updatedUserData.address1,
-                            address2: updatedUserData.address2
+                            ...updatedUserData  // Actualiza todos los campos del usuario con los datos recibidos del backend
                         }
                     }));
-
+            
                     return true;
                 } catch (error) {
                     console.error('Error updating profile:', error);
                     throw error;
                 }
             },
+           
 
             // Cerrar sesión
             logout: () => {
@@ -170,7 +169,22 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-            // Obtener productos
+            fetchCustomImages: async () => {
+                try {
+                    const response = await fetch('https://picsum.photos/v2/list?limit=5');
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch images");
+                    }
+                    const images = await response.json();
+                    const imageUrls = images.map(img => `https://picsum.photos/id/${img.id}/200/200`);
+                    setStore({ customImages: imageUrls });
+                } catch (error) {
+                    console.error("Error fetching images:", error);
+                }
+            },
+            
+
+                        // Obtener productos
             getProducts: async () => {
                 try {
                     const resp = await fetch(`${process.env.BACKEND_URL}/api/products`);

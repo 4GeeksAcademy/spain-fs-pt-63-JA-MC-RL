@@ -1,189 +1,211 @@
-// Design.js
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import "./../../styles/desing.css"
-import { Logo } from "./../component/logos.js"
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Context } from './../store/appContext';
+import "./../../styles/desing.css";
 
 const Design = () => {
-    const [products, setProducts] = useState([])
-    const [selectedProduct, setSelectedProduct] = useState(null)
-    const [selectedColor, setSelectedColor] = useState('GREEN') // Estado para el color seleccionado
-    const [selectedSize, setSelectedSize] = useState('MEDIUM') // Estado para la talla seleccionada
-    const [selectedQuantity, setSelectedQuantity] = useState(1) // Estado para la cantidad seleccionada
-    const [selectedDescription, setSelectedDescription] = useState('Description default') // Estado para la descripción seleccionada
-    const [selectedPrice, setSelectedPrice] = useState('00.00') // Estado para el precio seleccionado
-    const [selectedCustomImage, setSelectedCustomImage] = useState(null) // Estado para el precio seleccionado
-    const navigate = useNavigate()
-    const initialProducts = [
-        {
-            id: 1,
-            name: 'Camiseta deportiva ',
-            price: '74.00',
-            description: 'Tela 100% algodon ecologico, resistente y fresca.',
-            image_urls: {
-                GREEN: 'https://www.markamania.es/75317-medium_default/camiseta-roly-atomic-100-algodon-150-basica-promocional.jpg',
-                RED: 'https://www.ahorraentinta.es/6254-large_default/camiseta-100-algodon-jhk-color-155-gr-hombre.jpg', // Ejemplo de URL para camiseta roja
-                BLUE: 'https://naisa.es/11236-large_default/camiseta-basica-algodon-atomic-.jpg' // Ejemplo de URL para camiseta azul
-            },
-            descriptions: {
-                GREEN: 'green',
-                RED: 'red',
-                BLUE: 'blue'
-                // Añadir más descripciones según los colores disponibles
-            },
-            sizes: {
-                SMALL: {
-                    price: '10.00',
-                    stock: 20
-                },
-                MEDIUM: {
-                    price: '10.00',
-                    stock: 20
-                },
-                LARGE: {
-                    price: '10.00',
-                    stock: 20
-                }
-                // Añadir más tamaños según los disponibles
-            }
+  const { store, actions } = useContext(Context);
+  const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedColor, setSelectedColor] = useState('GREEN');
+  const [selectedSize, setSelectedSize] = useState('MEDIUM');
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
+  const [selectedDescription, setSelectedDescription] = useState('Description default');
+  const [selectedPrice, setSelectedPrice] = useState('00.00');
+  const [selectedCustomImage, setSelectedCustomImage] = useState(null);
+  const navigate = useNavigate();
+
+  const initialProducts = [
+    {
+      id: 1,
+      name: 'Camiseta deportiva',
+      price: '15,99',
+      description: 'Fabricada en algodón 100% ecológico, resistente y fresca.',
+      image_urls: {
+        GREEN: 'https://assets.wordans.es/files/model_specifications/2016/6/16/278058/278058_big.jpg?1673455515',
+        RED: 'https://assets.wordans.es/files/model_specifications/2016/6/16/278022/278022_big.jpg?1673455520',
+        BLUE: 'https://assets.wordans.es/files/model_specifications/2016/6/16/278016/278016_big.jpg?1673455527',
+        WHITE: 'https://assets.wordans.es/files/model_specifications/2016/6/16/277995/277995_big.jpg?1673455570',
+        PURPLE: 'https://assets.wordans.es/files/model_specifications/2016/6/16/278079/278079_big.jpg?1673455560'
+      },
+      descriptions: {
+        GREEN: 'green',
+        RED: 'red',
+        BLUE: 'blue',
+        WHITE: 'white',
+        PURPLE: 'purple'
+      },
+      sizes: {
+        SMALL: {
+          price: '15.99',
+          stock: 20
+        },
+        MEDIUM: {
+          price: '16.99',
+          stock: 20
+        },
+        LARGE: {
+          price: '17.99',
+          stock: 20
         }
-    ]
-    useEffect(() => {
-        // Simulando la carga de productos desde la API (en este caso, solo hay un producto)
-        setProducts(initialProducts)
-    }, [])
-
-    const getCustomImages = () => {
-        console.log("Haces un estado, que sea un [], y cuando la peticion te devuelva un response, le haces un setCustomImage(response)")
+      }
     }
-    const handleProductSelect = (product) => {
-        setSelectedProduct(product)
+  ];
+
+  useEffect(() => {
+    setProducts(initialProducts);
+    setSelectedPrice(initialProducts[0].sizes[selectedSize].price);
+    actions.fetchCustomImages();
+  }, [actions, selectedSize]);
+
+  const handleProductSelect = (product) => {
+    setSelectedProduct(product);
+  };
+
+  const handleColorChange = (color) => {
+    setSelectedColor(color);
+    setSelectedDescription(products[0].descriptions[color]);
+  };
+
+  const handleSizeChange = (size) => {
+    setSelectedSize(size);
+    setSelectedPrice(products[0].sizes[size].price);
+  };
+
+  const handleQuantityChange = (e) => {
+    const quantity = parseInt(e.target.value, 10);
+    setSelectedQuantity(quantity);
+  };
+
+  const handleCustomImage = (url) => {
+    setSelectedCustomImage(url);
+  };
+
+  const addToCart = () => {
+    if (selectedProduct) {
+      const productToAdd = {
+        ...selectedProduct,
+        color: selectedColor,
+        size: selectedSize,
+        quantity: selectedQuantity,
+        customImage: selectedCustomImage
+      };
+      localStorage.setItem('selectedProduct', JSON.stringify(productToAdd));
+      navigate('/cart');
     }
+  };
 
-    const handleColorChange = (color) => {
-        setSelectedColor(color)
-        setSelectedDescription(products[0].descriptions[color])
-        setSelectedPrice(products[0].sizes[selectedSize].price) // Actualizar precio al cambiar color
-    }
-
-    const handleSizeChange = (size) => {
-        setSelectedSize(size)
-        setSelectedPrice(products[0].sizes[size].price) // Actualizar precio al cambiar talla
-    }
-
-    const handleQuantityChange = (e) => {
-        const quantity = parseInt(e.target.value, 10)
-        setSelectedQuantity(quantity)
-    }
-    const handleCustomImage = (url) => {
-        setSelectedCustomImage(url)
-    }
-
-    const addToCart = () => {
-        if (selectedProduct) {
-            // Guardar el producto seleccionado en localStorage para usarlo en la vista de cart.js
-            const productToAdd = {
-                ...selectedProduct,
-                color: selectedColor,
-                size: selectedSize,
-                quantity: selectedQuantity
-            }
-            localStorage.setItem('selectedProduct', JSON.stringify(productToAdd))
-            navigate('/cart')
-        }
-    }
-
-    return (
-        <div className="design-view">
-            <h1>Selecciona un Producto para el Diseño</h1>
-            <div className="product-list">
-                {products.map(product => (
-                    <>
-                        <div key={product.id} className="product-card">
-                            <div className='cont-custom'>
-                                <button onClick={() => handleCustomImage('https://picsum.photos/200')} className='btn-select-custom-img'>
-                                    <img src="https://picsum.photos/200" />
-                                </button>
-                                <button onClick={() => handleCustomImage('https://picsum.photos/200')} className='btn-select-custom-img'>
-                                    <img src="https://picsum.photos/200" />
-                                </button>
-                                <button onClick={() => handleCustomImage('https://picsum.photos/200')} className='btn-select-custom-img'>
-                                    <img src="https://picsum.photos/200" />
-                                </button>
-                                <button onClick={() => handleCustomImage('https://picsum.photos/200')} className='btn-select-custom-img'>
-                                    <img src="https://picsum.photos/200" />
-                                </button>
-                                <button onClick={() => handleCustomImage('https://picsum.photos/200')} className='btn-select-custom-img'>
-                                    <img src="https://picsum.photos/200" />
-                                </button>
-                            </div>
-                            <div className='cont-product'>
-                                {selectedCustomImage &&
-                                    <img className="custom-img-detail" src={selectedCustomImage} alt={product.name} />
-                                }
-                                <img src={product.image_urls[selectedColor]} alt={product.name} />
-                            </div>
-                            <div className='cont-prod-details-box'>
-                                <div className='cont-prod-details'>
-                                    <h1>{product.name}</h1>
-                                    <p>Descripción: {product.description}</p> {/* Mostrar la descripción del color seleccionado */}
-                                    <p>Precio: <span className='price'>${selectedPrice}</span></p> {/* Mostrar el precio actualizado */}
-                                    <p>
-                                        Talla:
-                                        <select value={selectedSize} onChange={(e) => handleSizeChange(e.target.value)}>
-                                            {Object.keys(product.sizes).map(size => (
-                                                <option key={size} value={size}>{size}</option>
-                                            ))}
-                                        </select>
-                                    </p>
-                                    <div className='cont-select-color'>
-                                        <p>Selecciona el color:</p>
-                                        <div className='cont-color-picker'>
-                                            <button
-                                                className={`color-option ${selectedColor === 'GREEN' ? 'active' : ''}`}
-                                                style={{ backgroundColor: 'green' }}
-                                                onClick={() => handleColorChange('GREEN')}
-                                            >
-                                            </button>
-                                            <button
-                                                className={`color-option ${selectedColor === 'RED' ? 'active' : ''}`}
-                                                style={{ backgroundColor: 'red' }}
-                                                onClick={() => handleColorChange('RED')}
-                                            >
-                                            </button>
-                                            <button
-                                                className={`color-option ${selectedColor === 'BLUE' ? 'active' : ''}`}
-                                                style={{ backgroundColor: 'blue' }}
-                                                onClick={() => handleColorChange('BLUE')}
-                                            >
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                    <p>
-                                        Cantidad:
-                                        <input
-                                            type="number"
-                                            value={selectedQuantity}
-                                            onChange={handleQuantityChange}
-                                            min="1"
-                                            max={products[0].sizes[selectedSize].stock} // Limitar a la cantidad disponible
-                                        />
-                                    </p>
-
-                                    <button onClick={() => handleProductSelect(product)}>Seleccionar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </>
-                ))}
+  return (
+    <div className="design-view">
+      <div className='d-flex'>
+        <h1 className='title'>Diseña tu camiseta</h1>
+      </div>
+      <div className="product-list">
+        {products.map(product => (
+          <React.Fragment key={product.id}>
+            <div className="product-card">
+              <div className='cont-product'>
+                <div className='cont-product-images'>
+                  <div className="image-container">
+                    {selectedCustomImage && (
+                      <img className="custom-img-detail" src={selectedCustomImage} alt="Custom Design" />
+                    )}
+                    <img className="product-img-detail" src={product.image_urls[selectedColor]} alt={product.name} />
+                  </div>
+                </div>
+              </div>
+              <div className='cont-prod-details-box'>
+                <div className='cont-prod-details'>
+                  <h1>{product.name}</h1>
+                  <p>Descripción: {product.description}</p>
+                  <p>Precio: <span className='price'>${selectedPrice}</span></p>
+                  <p>
+                    Talla:
+                    <select className='mx-2' value={selectedSize} onChange={(e) => handleSizeChange(e.target.value)}>
+                      {Object.keys(product.sizes).map(size => (
+                        <option key={size} value={size}>{size}</option>
+                      ))}
+                    </select>
+                  </p>
+                  <p>
+                    Cantidad:
+                    <input className='mx-2'
+                      type="number"
+                      value={selectedQuantity}
+                      onChange={handleQuantityChange}
+                      min="1"
+                      max={products[0].sizes[selectedSize].stock}
+                    />
+                  </p>
+                  <div className='cont-select-color'>
+                    <p>Selecciona el color:</p>
+                    <div className='cont-color-picker'>
+                      <button
+                        className={`color-option ${selectedColor === 'GREEN' ? 'active' : ''}`}
+                        style={{ backgroundColor: 'green' }}
+                        onClick={() => handleColorChange('GREEN')}
+                      >
+                      </button>
+                      <button
+                        className={`color-option ${selectedColor === 'RED' ? 'active' : ''}`}
+                        style={{ backgroundColor: 'red' }}
+                        onClick={() => handleColorChange('RED')}
+                      >
+                      </button>
+                      <button
+                        className={`color-option ${selectedColor === 'BLUE' ? 'active' : ''}`}
+                        style={{ backgroundColor: 'blue' }}
+                        onClick={() => handleColorChange('BLUE')}
+                      >
+                      </button>
+                      <button
+                        className={`color-option ${selectedColor === 'WHITE' ? 'active' : ''}`}
+                        style={{ backgroundColor: 'white' }}
+                        onClick={() => handleColorChange('WHITE')}
+                      >
+                      </button>
+                      <button
+                        className={`color-option ${selectedColor === 'PURPLE' ? 'active' : ''}`}
+                        style={{ backgroundColor: 'purple' }}
+                        onClick={() => handleColorChange('PURPLE')}
+                      >
+                      </button>
+                    </div>
+                  </div>
+                  <div className='mt-4'>
+                    <button className=" btn btn-primary mx-1" onClick={() => handleProductSelect(product)} type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Diseña AQUI</button>
+                    <button onClick={addToCart} disabled={!selectedProduct}>Agregar al Carrito</button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <button onClick={addToCart} disabled={!selectedProduct}>
-                Agregar al Carrito
-            </button>
-            <Logo />
-        </div>
-    )
-}
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h1 className="modal-title fs-5" id="exampleModalLabel">Selecciona una imagen personalizada</h1>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div className="modal-body">
+                    <div className="custom-image-list">
+                      {store.customImages.map((url, index) => (
+                        <button key={index} onClick={() => handleCustomImage(url)} className='btn-select-custom-img'>
+                          <img src={url} alt={`Custom ${index}`} />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
+  );
+};
 
-export default Design
+export default Design;

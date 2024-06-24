@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import "./register.css"
 
 const Register = () => {
     const [email, setEmail] = useState('');
@@ -41,18 +42,78 @@ const Register = () => {
     };
 
     return (
-        <div>
+        <div className="register-container">
             <h1>Register</h1>
-            <input name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-            <input name="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-            <input name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="First Name" />
-            <input name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Last Name" />
-            <input name="phoneNumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} placeholder="Phone Number" />
-            <input name="city" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" />
-            <input name="country" value={country} onChange={(e) => setCountry(e.target.value)} placeholder="Country" />
-            <input name="postalCode" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} placeholder="Postal Code" />
-            <input name="address1" value={address1} onChange={(e) => setAddress1(e.target.value)} placeholder="Address 1" />
-            <input name="address2" value={address2} onChange={(e) => setAddress2(e.target.value)} placeholder="Address 2" />
+            <input 
+                name="email" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)} 
+                placeholder="Email" 
+                required
+            />
+            <input 
+                name="password" 
+                type="password" 
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
+                placeholder="Password" 
+                required
+            />
+            <input 
+                name="firstName" 
+                value={firstName} 
+                onChange={(e) => setFirstName(e.target.value)} 
+                placeholder="First Name" 
+                required
+            />
+            <input 
+                name="lastName" 
+                value={lastName} 
+                onChange={(e) => setLastName(e.target.value)} 
+                placeholder="Last Name" 
+                required
+            />
+            <input 
+                name="phoneNumber" 
+                value={phoneNumber} 
+                onChange={(e) => setPhoneNumber(e.target.value)} 
+                placeholder="Phone Number" 
+                required
+            />
+            <input 
+                name="city" 
+                value={city} 
+                onChange={(e) => setCity(e.target.value)} 
+                placeholder="City" 
+                required
+            />
+            <input 
+                name="country" 
+                value={country} 
+                onChange={(e) => setCountry(e.target.value)} 
+                placeholder="Country" 
+                required
+            />
+            <input 
+                name="postalCode" 
+                value={postalCode} 
+                onChange={(e) => setPostalCode(e.target.value)} 
+                placeholder="Postal Code" 
+                required
+            />
+            <input 
+                name="address1" 
+                value={address1} 
+                onChange={(e) => setAddress1(e.target.value)} 
+                placeholder="Address 1" 
+                required
+            />
+            <input 
+                name="address2" 
+                value={address2} 
+                onChange={(e) => setAddress2(e.target.value)} 
+                placeholder="Address 2" 
+            />
             <button onClick={handleRegister}>Register</button>
         </div>
     );

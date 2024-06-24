@@ -65,15 +65,12 @@ def create_user():
 def update_user(id):
     user = User.query.get_or_404(id)
     data = request.get_json()
-    user.email = data.get('email', user.email)
-    user.password = data.get('password', user.password)
     user.first_name = data.get('first_name', user.first_name)
     user.last_name = data.get('last_name', user.last_name)
     user.phone_number = data.get('phone_number', user.phone_number)
     user.city = data.get('city', user.city)
     user.country = data.get('country', user.country)
     user.postal_code = data.get('postal_code', user.postal_code)
-    user.registration_date = data.get('registration_date', user.registration_date)
     user.address1 = data.get('address1', user.address1)
     user.address2 = data.get('address2', user.address2)
     db.session.commit()
@@ -112,20 +109,6 @@ def create_product():
     db.session.add(new_product)
     db.session.commit()
     return jsonify(new_product.serialize()), 201
-
-@api.route('/product/<int:id>', methods=['PUT'])
-def update_product(id):
-    product = Product.query.get_or_404(id)
-    data = request.get_json()
-    product.name = data.get('name', product.name)
-    product.price = data.get('price', product.price)
-    product.description = data.get('description', product.description)
-    product.image_url = data.get('image_url', product.image_url)
-    product.size = data.get('size', product.size)
-    product.color = data.get('color', product.color)
-    product.stock = data.get('stock', product.stock)
-    db.session.commit()
-    return jsonify(product.serialize())
 
 @api.route('/product/<int:id>', methods=['DELETE'])
 def delete_product(id):

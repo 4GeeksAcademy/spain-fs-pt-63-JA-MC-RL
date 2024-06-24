@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import "./login.css"
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -9,23 +10,41 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleLogin = async () => {
-        const isAuthenticated = await actions.login({ email: email, password: password });
-        console.log("autenticated", isAuthenticated)
-        // Si la autenticación es exitosa, redirige a la ruta "home"
-        if (isAuthenticated) {
-            navigate('/'); // Reemplaza "/home" con la ruta adecuada en tu aplicación
-        } else {
-            // Manejar el error, mostrar mensaje, etc.
-            console.log("Login failed");
+        try {
+            const isAuthenticated = await actions.login({ email, password });
+            
+            if (isAuthenticated) {
+                navigate('/home'); // Redirige a la página principal o a la ruta deseada después del login
+            } else {
+                console.log("Login failed"); // Manejar caso de login fallido si es necesario
+            }
+        } catch (error) {
+            console.error("Error during login:", error);
         }
     };
 
     return (
-        <div>
+        <div className="login-container">
             <h1>Login</h1>
-            <input name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email" />
-            <input name="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password" />
-            <button onClick={handleLogin}>Entrar</button>
+            <form className="login-form">
+                <input
+                    type="email"
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                    className="login-input"
+                />
+                <input
+                    type="password"
+                    name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Password"
+                    className="login-input"
+                />
+                <button type="button" onClick={handleLogin} className="login-button">Entrar</button>
+            </form>
         </div>
     );
 };

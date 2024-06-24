@@ -1,8 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../store/appContext';
+import './profile.css';
 
 const Profile = () => {
     const { store, actions } = useContext(Context);
+
+    // Estado inicial para los datos del usuario
     const [userData, setUserData] = useState({
         email: '',
         firstName: '',
@@ -15,9 +18,23 @@ const Profile = () => {
         address2: ''
     });
 
-    // useEffect para inicializar userData con los datos actuales del usuario
+    // Estado para controlar si se está editando cada campo
+    const [isEditing, setIsEditing] = useState({
+        email: false,
+        firstName: false,
+        lastName: false,
+        phoneNumber: false,
+        city: false,
+        country: false,
+        postalCode: false,
+        address1: false,
+        address2: false
+    });
+
+    // Efecto para cargar los datos del usuario al montar el componente o cuando cambie store.user
     useEffect(() => {
         if (store.user) {
+            // Mapear los datos de store.user a userData
             setUserData({
                 email: store.user.email || '',
                 firstName: store.user.first_name || '',
@@ -32,7 +49,7 @@ const Profile = () => {
         }
     }, [store.user]);
 
-    // Función para manejar cambios en los campos del formulario
+    // Función para manejar el cambio en los campos de entrada
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUserData(prevState => ({
@@ -41,50 +58,68 @@ const Profile = () => {
         }));
     };
 
-    // Función para manejar envío del formulario
+    // Función para alternar entre modo de edición y no edición para un campo específico
+    const toggleEditing = (field) => {
+        setIsEditing(prevState => ({
+            ...prevState,
+            [field]: !prevState[field]
+        }));
+    };
+
+    // Función para manejar el envío del formulario
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await actions.updateProfile(userData);  // Llama a la acción de actualizar perfil
-            alert('Profile updated successfully!');
-
-            // Opcional: Actualizar userData con los datos actualizados del usuario después de la actualización
-            // Esto depende de cómo actualizas el estado global en `actions.updateProfile`
-            // setUserData({
-            //     ...userData,
-            //     // Actualizar con los datos devueltos después de la actualización
-            // });
-
+            await actions.updateProfile(userData);
+            alert('¡Perfil actualizado correctamente!');
+            // Deshabilitar todos los modos de edición después de la actualización exitosa
+            setIsEditing({
+                email: false,
+                firstName: false,
+                lastName: false,
+                phoneNumber: false,
+                city: false,
+                country: false,
+                postalCode: false,
+                address1: false,
+                address2: false
+            });
         } catch (error) {
-            console.error('Error updating profile:', error);
-            alert('Failed to update profile. Please try again.');
+            console.error('Error actualizando el perfil:', error);
+            alert('Error al actualizar el perfil. Por favor, inténtalo de nuevo.');
         }
     };
 
-    // JSX para el componente Profile
     return (
-        <div>
-            <h1>Profile</h1>
-            <form onSubmit={handleSubmit} className='flex-direction-column'>
-                <label>Email:</label>
-                <input name="email" value={userData.email} onChange={handleChange} />
-                <label>First Name:</label>
-                <input name="firstName" value={userData.firstName} onChange={handleChange} />
-                <label>Last Name:</label>
-                <input name="lastName" value={userData.lastName} onChange={handleChange} />
-                <label>Phone Number:</label>
-                <input name="phoneNumber" value={userData.phoneNumber} onChange={handleChange} />
-                <label>City:</label>
-                <input name="city" value={userData.city} onChange={handleChange} />
-                <label>Country:</label>
-                <input name="country" value={userData.country} onChange={handleChange} />
-                <label>Postal Code:</label>
-                <input name="postalCode" value={userData.postalCode} onChange={handleChange} />
-                <label>Address 1:</label>
-                <input name="address1" value={userData.address1} onChange={handleChange} />
-                <label>Address 2:</label>
-                <input name="address2" value={userData.address2} onChange={handleChange} />
-                <button type="submit">Update Profile</button>
+        <div className="profile-container">
+            <h1>Perfil</h1>
+            <form onSubmit={handleSubmit} className="profile-form">
+                {Object.keys(userData).map(key => (
+                    <div className="input-group" key={key}>
+                        <label>{key.charAt(0).toUpperCase() + key.slice(1)}:</label>
+                        <input
+                            type="text"
+                            name={key}
+                            value={userData[key]}
+                            onChange={handleChange}
+                            disabled={!isEditing[key]}
+                            placeholder={userData[key]}
+                            className={isEditing[key] ? 'editing' : ''}
+                        />
+                        {!isEditing[key] && (
+                            <button
+                                type="button"
+                                className="edit-button"
+                                onClick={() => toggleEditing(key)}
+                            >
+                                ✏️
+                            </button>
+                        )}
+                    </div>
+                ))}
+                {Object.values(isEditing).some(Boolean) && (
+                    <button type="submit">Actualizar Perfil</button>
+                )}
             </form>
         </div>
     );

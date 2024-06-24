@@ -1,0 +1,94 @@
+.navbar {
+    width: 100%;
+    background-color: #f8f9fa; /* Fondo claro para mejor contraste */
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-left,
+.navbar-center,
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-left {
+    justify-content: center;
+}
+
+.navbar-center {
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.navbar-right {
+    justify-content: flex-end;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    max-height: 40px;
+    margin-right: 10px;
+}
+
+.navbar-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.nav-item {
+    margin: 0 10px;
+}
+
+.nav-link {
+    color: #000;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: all 0.3s ease; /* Transición suave para hover */
+}
+
+.nav-link:hover {
+    color: #fff; /* Cambio de color del texto */
+    background-color: #768ea8; /* Fondo azul llamativo */
+    transform: scale(1.1); /* Agranda el enlace */
+    box-shadow: 0px 4px 15px rgba(0, 123, 255, 0.5); /* Sombra */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+.btn {
+    padding: 5px 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease; /* Transición suave para hover */
+}
+
+.btn:hover {
+    background-color: #28a745; /* Fondo verde */
+    color: #fff; /* Texto blanco */
+    transform: translateY(-3px); /* Efecto de elevación */
+    box-shadow: 0px 8px 15px rgba(0, 128, 0, 0.3); /* Sombra */
+}
+
+/* Media query para dispositivos más pequeños */
+@media (max-width: 992px) {
+    .navbar-center {
+        order: 2;
+    }
+
+    .navbar-right {
+        order: 3;
+    }
+}

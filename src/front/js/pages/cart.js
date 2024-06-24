@@ -1,108 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import './../../styles/cart.css'; // Ajusta la ruta según la ubicación real de cart.css
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import "./../../styles/cart.css";
 
 const Cart = () => {
-    const [quantity, setQuantity] = useState(1);
-    const [selectedColor, setSelectedColor] = useState('');
-    const [selectedSize, setSelectedSize] = useState('');
-    const [selectedProduct, setSelectedProduct] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0); // Estado para el precio total
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        // Obtener el producto seleccionado desde localStorage (simulando la navegación desde Design.js)
-        const storedProduct = JSON.parse(localStorage.getItem('selectedProduct'));
-        if (storedProduct) {
-            setSelectedProduct(storedProduct);
-            setSelectedColor(storedProduct.color);
-            setSelectedSize(storedProduct.size);
-            setQuantity(storedProduct.quantity);
-        }
-    }, []); // Vacío para que se ejecute solo una vez al montar el componente
+  useEffect(() => {
+    const storedProduct = localStorage.getItem('selectedProduct');
+    if (storedProduct) {
+      setCartItems([JSON.parse(storedProduct)]);
+      calculateTotalPrice(storedProduct); // Calcular el precio total basado en la talla
+    }
+  }, []);
 
-    // Función para actualizar la cantidad del producto
-    const handleQuantityChange = (event) => {
-        const newQuantity = parseInt(event.target.value, 10);
-        setQuantity(newQuantity);
-    };
+  const calculateTotalPrice = (product) => {
+    if (product && product.size && product.quantity) {
+        const sizePrice = parseFloat(product.sizes[product.size].price); // Obtener el precio de la talla seleccionada
+        const total = (sizePrice * product.quantity).toFixed(2);
+        setTotalPrice(total);
+    }
+};
 
-    // Función para actualizar el color seleccionado del producto
-    const handleColorChange = (event) => {
-        setSelectedColor(event.target.value);
-    };
+  const handleCheckout = () => {
+    // Lógica para realizar la compra
+    navigate('/checkout');
+  };
 
-    // Función para actualizar la talla seleccionada del producto
-    const handleSizeChange = (event) => {
-        setSelectedSize(event.target.value);
-    };
-
-    // Función para guardar los cambios realizados en el producto
-    const updateProduct = () => {
-        const updatedProduct = {
-            ...selectedProduct,
-            quantity: quantity,
-            color: selectedColor,
-            size: selectedSize
-        };
-
-        localStorage.setItem('selectedProduct', JSON.stringify(updatedProduct));
-        alert('Producto actualizado correctamente.');
-        setSelectedProduct(updatedProduct); // Actualizar estado local también si es necesario
-    };
-
-    return (
-        <div className="cart-view">
-            <h1>Carrito de Compras</h1>
-            {selectedProduct ? (
-                <div className="selected-product">
-                    <img src={selectedProduct.image_urls[selectedColor]} alt={selectedProduct.name} />
-                    <h2>{selectedProduct.name}</h2>
-                    <p>{selectedProduct.description}</p>
-                    <p>Precio: ${selectedProduct.price}</p>
-
-                    {/* Selector de cantidad */}
-                    <label htmlFor="quantity">Cantidad:</label>
-                    <input
-                        type="number"
-                        id="quantity"
-                        name="quantity"
-                        min="1"
-                        value={quantity}
-                        onChange={handleQuantityChange}
-                    />
-
-                    {/* Selector de color */}
-                    <label htmlFor="color">Color:</label>
-                    <select id="color" name="color" value={selectedColor} onChange={handleColorChange}>
-                        <option value="GREEN">Verde</option>
-                        <option value="BLUE">Azul</option>
-                        <option value="RED">Rojo</option>
-                    </select>
-
-                    {/* Selector de talla */}
-                    <label htmlFor="size">Talla:</label>
-                    <select id="size" name="size" value={selectedSize} onChange={handleSizeChange}>
-                        <option value="SMALL">S</option>
-                        <option value="MEDIUM">M</option>
-                        <option value="LARGE">L</option>
-                    </select>
-
-                    {/* Botón para actualizar el producto */}
-                    <button className="update-button" onClick={updateProduct}>
-                        Actualizar Producto
-                    </button>
-                </div>
-            ) : (
-                <p>No hay productos en el carrito.</p>
-            )}
-
-            {/* Botón para ir a Checkout */}
-            {selectedProduct && (
-                <Link to="/checkout">
-                    <button className="checkout-button">Ir a Checkout</button>
-                </Link>
-            )}
+  return (
+    <div className="cart-view">
+      <h1>Carrito de Compras</h1>
+      {cartItems.length === 0 ? (
+        <p>No hay productos en el carrito</p>
+      ) : (
+        <div className="cart-list">
+          {cartItems.map((item, index) => (
+            <div key={index} className="cart-item">
+              <img src={item.image_urls[item.color]} alt={item.name} className="cart-item-image" />
+              {item.customImage && (
+                <img src={item.customImage} alt="Custom Design" className="cart-custom-image" />
+              )}
+              <div className="cart-item-details">
+                <h2>{item.name}</h2>
+                <p>Color: {item.color}</p>
+                <p>Talla: {item.size}</p>
+                <p>Cantidad: {item.quantity}</p>
+                <p>Precio: ${item.price}</p>
+              </div>
+            </div>
+          ))}
         </div>
-    );
+      )}
+      {cartItems.length > 0 && (
+        <button onClick={handleCheckout}>Realizar Compra</button>
+      )}
+    </div>
+  );
 };
 
 export default Cart;

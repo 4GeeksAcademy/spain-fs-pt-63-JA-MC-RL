@@ -1,41 +1,65 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; // Importa Link desde react-router-dom
-import './../../styles/checkout.css';
+import { useNavigate } from 'react-router-dom';
+import "./../../styles/cart.css";
 
 const Checkout = () => {
-    const [selectedProduct, setSelectedProduct] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0); // Estado para el precio total
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        // Obtener el producto seleccionado desde localStorage (simulando la navegación desde cart.js)
-        const storedProduct = JSON.parse(localStorage.getItem('selectedProduct'));
-        if (storedProduct) {
-            setSelectedProduct(storedProduct);
-        }
-    }, []);
+  useEffect(() => {
+    const storedProduct = localStorage.getItem('selectedProduct');
+    if (storedProduct) {
+      setCartItems([JSON.parse(storedProduct)]);
+      calculateTotalPrice(JSON.parse(storedProduct)); // Calcular el precio total basado en la talla
+    }
+  }, []);
 
-    return (
-        <div className="checkout-view">
-            <h1>Checkout</h1>
-            {selectedProduct ? (
-                <div className="selected-product">
-                    <img src={selectedProduct.image_urls[selectedProduct.color]} alt={selectedProduct.name} />
-                    <h2>{selectedProduct.name}</h2>
-                    <p>{selectedProduct.description}</p>
-                    <p>Precio: ${selectedProduct.price}</p>
-                    <p>Talla: {selectedProduct.size}</p>
-                    <p>Color: {selectedProduct.color}</p>
-                    <p>Cantidad: {selectedProduct.quantity}</p>
-                    <p>Stock: {selectedProduct.stock}</p>
-                    {/* Aquí podrías añadir más detalles del producto, como cantidad, opciones de personalización, etc. */}
-                    <Link to="/payment">
-                        <button className="pay-button">Pagar</button>
-                    </Link>
-                </div>
-            ) : (
-                <p>No hay productos seleccionados en el carrito.</p>
-            )}
+  const calculateTotalPrice = (product) => {
+    if (product && product.size && product.quantity) {
+      const sizePrice = parseFloat(product.sizes[product.size].price); // Obtener el precio de la talla seleccionada
+      const total = (sizePrice * product.quantity).toFixed(2);
+      setTotalPrice(total);
+    }
+  };
+
+  const handleConfirmPurchase = () => {
+    // Lógica para confirmar la compra (puedes implementar lógica adicional aquí)
+    // Aquí puedes realizar acciones adicionales antes de navegar a la página de confirmación
+    localStorage.removeItem('selectedProduct'); // Eliminar el producto del localStorage después de la compra
+    navigate('/confirmation'); // Navegar a la página de confirmación o a donde necesites
+  };
+
+  return (
+    <div className="checkout-view">
+      <h1>Checkout</h1>
+      {cartItems.length === 0 ? (
+        <p>No hay productos en el carrito</p>
+      ) : (
+        <div className="checkout-list">
+          {cartItems.map((item, index) => (
+            <div key={index} className="checkout-item">
+              <img src={item.image_urls[item.color]} alt={item.name} className="checkout-item-image" />
+              {item.customImage && (
+                <img src={item.customImage} alt="Custom Design" className="checkout-custom-image" />
+              )}
+              <div className="checkout-item-details">
+                <h2>{item.name}</h2>
+                <p>Color: {item.color}</p>
+                <p>Talla: {item.size}</p>
+                <p>Cantidad: {item.quantity}</p>
+                <p>Precio: ${item.price}</p>
+              </div>
+            </div>
+          ))}
         </div>
-    );
+      )}
+      <div className="checkout-total">
+        <h3>Total a Pagar: ${totalPrice}</h3>
+        <button onClick={handleConfirmPurchase}>Confirmar Compra</button>
+      </div>
+    </div>
+  );
 };
 
 export default Checkout;
