@@ -1,20 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import carrusel from "./../../img/carrusel.jpg";
 import carrusel2 from "../../img/carrusel2.0.jpg";
 import carrusel3 from "../../img/carrusel3.jpg";
 import creatutee from "./../../img/creatutee.jpg";
-import { FaCcMastercard } from "react-icons/fa";
-import { FaCcVisa } from "react-icons/fa";
-import { FaCcPaypal } from "react-icons/fa";
-import { FaUps } from "react-icons/fa";
-import { FaDhl } from "react-icons/fa";
-import { FaFedex } from "react-icons/fa";
-
+import { FaCcMastercard, FaCcVisa, FaCcPaypal, FaUps, FaDhl, FaFedex } from "react-icons/fa";
+import Modal from "../component/modal";
 
 export const Home = () => {
     const { store, actions } = useContext(Context);
+
+    const [showModal, setShowModal] = useState(false);
+    const handleShow = () => setShowModal(true);
+    const handleClose = () => setShowModal(false);
 
     return (
         <div className="text-center mt-3">
@@ -52,11 +51,11 @@ export const Home = () => {
                     </div>
                     <div className="col-md-12 col-lg-8">
                         <div className="ps-5 pt-5 pe-5 mb-0 d-flex">
-
                             <p className="mb-1 fs-2 fw-medium text-body-tertiary">Es genial.</p>
                         </div>
                         <div className="ps-5 pe-5 mt-0">
-                            <p className="fw-light text-center">"Un grupo se convierte en un equipo cuando cada miembro está lo suficientemente seguro de sí mismo y de su contribución como para alabar las habilidades de los demás"
+                            <p className="fw-light text-center custom-paragraph">
+                                "Un grupo se convierte en un equipo cuando cada miembro está lo suficientemente seguro de sí mismo y de su contribución como para alabar las habilidades de los demás"
                             </p>
                         </div>
 
@@ -69,13 +68,14 @@ export const Home = () => {
                 <div className="row justify-content-center mt-5">
                     <div className="col-md-12 col-lg-8">
                         <div className="ps-5 pt-5 pe-5 mb-0 d-flex">
-
                             <p className="mb-1 fs-2 fw-medium text-body-tertiary">100% Cuida tu planeta.</p>
                         </div>
                         <div className="ps-5 pe-5 mt-0">
-                            <p className="fw-light text-center">" En un mundo donde la moda cambia constantemente, es importante recordar el impacto que nuestras decisiones tienen en el medio ambiente. Optar por materiales sostenibles, como el algodón orgánico o el poliéster reciclado,"
-                            </p>
-                        </div>
+    <p className="fw-light text-center custom-paragraph">
+        "En un mundo donde la moda cambia constantemente, es importante recordar el impacto que nuestras decisiones tienen en el medio ambiente. Optar por materiales sostenibles, como el algodón orgánico o el poliéster reciclado,"
+    </p>
+</div>
+
                     </div>
                     <div className="col-md-12 col-lg-4 p-4 text-center">
                         <img src="https://static.vecteezy.com/system/resources/previews/002/694/750/non_2x/eco-friendly-seal-stamp-free-vector.jpg" className="rounded-circle imagenredonda img-responsive" alt="Eco Friendly" />
@@ -92,24 +92,25 @@ export const Home = () => {
                     </div>
                     <div className="col-md-12 col-lg-8">
                         <div className="ps-5 pt-5 pe-5 mb-0 d-flex">
-
-                            <p className="mb-1 fs-2 fw-medium text-body-tertiary">Esfuerzo y creacion.</p>
+                            <p className="mb-1 fs-2 fw-medium text-body-tertiary">Esfuerzo y creación.</p>
                         </div>
                         <div className="ps-5 pe-5 mt-0">
-                            <p className="fw-light text-center">Nos comprometemos a aportar ideas originales y enfoques creativos en el diseño de nuestras camisetas. Queremos que cada camiseta refleje nuestra pasión y dedicación."Estamos emocionados de embarcarnos en este viaje juntos y confiamos en que, con nuestro esfuerzo combinado, lograremos grandes cosas. Gracias a todos por su dedicación y compromiso."
-                            </p>
-                        </div>
+    <p className="fw-light text-center custom-paragraph">
+        Nos comprometemos a aportar ideas originales y enfoques creativos en el diseño de nuestras camisetas. Queremos que cada camiseta refleje nuestra pasión y dedicación. "Estamos emocionados de embarcarnos en este viaje juntos y confiamos en que, con nuestro esfuerzo combinado, lograremos grandes cosas. Gracias a todos por su dedicación y compromiso.
+    </p>
+</div>
+
                     </div>
                 </div>
             </div>
 
             <div className="line-separator"></div>
 
-            <div className="container">
+            <div className="container-fluid">
                 <div className="row">
-                    <div className="col-4" style={{ borderRight: '2px solid #ccc' }}>
-                        <div className="container-fluid bg-white">
-                            <u><strong>Metodos de pago:</strong></u>
+                    <div className="col-md-4" style={{ borderRight: '2px solid #ccc' }}>
+                        <div className="container-fluid">
+                            <u><strong>Métodos de pago:</strong></u>
                             <div className="d-flex justify-content-center">
                                 <p className="pago me-3 mt-2">
                                     <FaCcMastercard size={45} />
@@ -123,16 +124,16 @@ export const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-4" style={{ borderRight: '2px solid #ccc' }}>
-                        <div className="container-fluid bg-white">
-                            <u><strong>Nuestra garantia:</strong></u>
-                            <br></br>
-                            ¿No te gusta cómo te queda? <br></br>
+                    <div className="col-md-4" style={{ borderRight: '2px solid #ccc' }}>
+                        <div className="container-fluid">
+                            <u><strong>Nuestra garantía:</strong></u>
+                            <br />
+                            ¿No te gusta cómo te queda? <br />
                             Puedes devolverlo en 30 días...
                         </div>
                     </div>
-                    <div className="col-4">
-                        <div className="container-fluid bg-white">
+                    <div className="col-md-4">
+                        <div className="container-fluid">
                             <u><strong>Envío a nivel mundial:</strong></u>
                             <div className="d-flex justify-content-center">
                                 <p className="pago me-3 mt-2">
@@ -152,47 +153,42 @@ export const Home = () => {
 
             <div className="line-separator"></div>
 
-            <div className="container-fluid bg-ligth">
+            <div className="container-fluid bg-white">
                 <div className="row">
-                    <div className="col-3">
-                        <img src="creatutee.jpg" alt="CreaTuTee" width="200" height="200" />
+                    <div className="col-md-3 col-sm-6">
+                        <img src={creatutee} alt="CreaTuTee" className="img-fluid small-img" />
                     </div>
-                    <div className="col-3">
+
+                    <div className="col-md-3 col-sm-6">
                         <u><strong><h4>Atención al cliente:</h4></strong></u>
-                        <ul>
+                        <ul className="list-unstyled">
                             <li>Ayuda</li>
-                            <li>Contactanos</li>
-                            <li>+0 55 555 5555</li>
+                            <li>Contáctanos</li>
+                            <strong><li style={{ color: "blue" }}>+0 55 555 55 55</li></strong>
                         </ul>
                     </div>
-                    <div className="col-3">
+                    <div className="col-md-3 col-sm-6">
                         <u><strong><h4>Empresa:</h4></strong></u>
-                        <ul>
-                            <li>Como funciona</li>
+                        <ul className="list-unstyled">
+                            <li>Cómo funciona</li>
                             <li>ECO friendly</li>
                             <li>About Us</li>
-                            <li>Terminos y Condiciones</li>
+                            <strong><li onClick={handleShow} style={{ cursor: "pointer", color: "black" }}>Términos y Condiciones</li></strong>
                         </ul>
                     </div>
-                    <div className="col-3">
-                        <u><strong><h4>Siguenos:</h4></strong></u>
-                        <ul>
+                    <div className="col-md-3 col-sm-6">
+                        <u><strong><h4>Síguenos:</h4></strong></u>
+                        <ul className="list-unstyled">
                             <li>Instagram</li>
                             <li>Facebook</li>
                             <li>Twitter</li>
                             <li>Pinterest</li>
                             <li>YouTube</li>
                         </ul>
-                        <div />
-
                     </div>
-
                 </div>
-
             </div>
+            <Modal show={showModal} handleClose={handleClose} />
         </div>
     );
 };
-
-
-

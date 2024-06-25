@@ -40,19 +40,19 @@ export const Navbar = () => {
 
         <div className="collapse navbar-collapse" id="navbarContent">
           <ul className="navbar-nav mx-auto navbar-center">
-            <li className="nav-item">
+            <button className="btn btn-success nav-link">
               <Link to="/home" className="nav-link">Inicio</Link>
-            </li>
-            <li className="nav-item">
+            </button>
+            <button className="nav-item btn btn-outline-success">
               <a href="./desing" className="nav-link">DiseñaTuTee</a>
-            </li>
-            <li className="nav-item">
+            </button>
+            <li className="nav-item btn btn-outline-success">
               <a href="#how-it-works" className="nav-link">Cómo funciona</a>
             </li>
-            <li className="nav-item">
+            <li className="nav-item btn btn-outline-success">
               <a href="#eco-friendly" className="nav-link">EcoFriendly</a>
             </li>
-            <li className="nav-item">
+            <li className="nav-item btn btn-outline-success">
               <a href="#about-us" className="nav-link">Acerca de nosotros</a>
             </li>
           </ul>
