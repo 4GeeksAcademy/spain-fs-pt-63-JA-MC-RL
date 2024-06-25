@@ -87,3 +87,48 @@
 .bg-light-gray {
     background-color: #f8f9fa; 
 }
+.logocrea{
+    background-color: #ddeeff;
+}
+
+/* Archivo: home.css */
+
+.btn-custom {
+    background-color: #ddeeff; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Relleno del botón */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 1.3s ease; /* Transición suave */
+  }
+  
+  .btn-custom:hover {
+    background-color:  #bee73a; /* Color de fondo al pasar el cursor */
+    color: white; /* Color del texto al pasar el cursor */
+  }
+
+  .btn-custom2 {
+    background-color:#ddeeff; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border:none; /* Sin borde */
+    padding: 8px 30px; /* Relleno del botón */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 1.3s ease; /* Transición suave */
+  }
+
+  .btn-custom2:hover {
+    background-color:  #9ee1fb; /* Color de fondo al pasar el cursor */
+    color: white; /* Color del texto al pasar el cursor */
+  }
+
+  .carrito-button {
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    padding: 0; /* Sin relleno */
+    cursor: pointer; /* Cursor de puntero */
+  }
+  
+  .carrito-button:hover {
+    color: #3c9ccc; /* Color al pasar el cursor */
+  }
+  

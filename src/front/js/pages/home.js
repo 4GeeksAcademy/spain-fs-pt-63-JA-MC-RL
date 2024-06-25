@@ -4,7 +4,7 @@ import "../../styles/home.css";
 import carrusel from "./../../img/carrusel.jpg";
 import carrusel2 from "../../img/carrusel2.0.jpg";
 import carrusel3 from "../../img/carrusel3.jpg";
-import creatutee from "./../../img/creatutee.jpg";
+import creatutee2 from "./../../img/creatutee2.jpg";
 import { FaCcMastercard, FaCcVisa, FaCcPaypal, FaUps, FaDhl, FaFedex } from "react-icons/fa";
 import Modal from "../component/modal";
 
@@ -25,10 +25,10 @@ export const Home = () => {
                 </div>
                 <div className="carousel-inner">
                     <div className="carousel-item active">
-                        <img src={carrusel} className="d-block w-100" alt="First slide" />
+                        <img src={carrusel2} className="d-block w-100" alt="First slide" />
                     </div>
                     <div className="carousel-item">
-                        <img src={carrusel2} className="d-block w-100" alt="Second slide" />
+                        <img src={carrusel} className="d-block w-100" alt="Second slide" />
                     </div>
                     <div className="carousel-item">
                         <img src={carrusel3} className="d-block w-100" alt="Third slide" />
@@ -51,7 +51,7 @@ export const Home = () => {
                     </div>
                     <div className="col-md-12 col-lg-8">
                         <div className="ps-5 pt-5 pe-5 mb-0 d-flex">
-                            <p className="mb-1 fs-2 fw-medium text-body-tertiary">Es genial.</p>
+                            <p className="mb-1 fs-2 fw-medium text-body-tertiary desplazado">Es genial.</p>
                         </div>
                         <div className="ps-5 pe-5 mt-0">
                             <p className="fw-light text-center custom-paragraph">
@@ -68,7 +68,8 @@ export const Home = () => {
                 <div className="row justify-content-center mt-5">
                     <div className="col-md-12 col-lg-8">
                         <div className="ps-5 pt-5 pe-5 mb-0 d-flex">
-                            <p className="mb-1 fs-2 fw-medium text-body-tertiary">100% Cuida tu planeta.</p>
+                        <p className="mb-1 fs-2 fw-medium text-body-tertiary desplazado">100% Cuida tu planeta.</p>
+
                         </div>
                         <div className="ps-5 pe-5 mt-0">
     <p className="fw-light text-center custom-paragraph">
@@ -92,7 +93,7 @@ export const Home = () => {
                     </div>
                     <div className="col-md-12 col-lg-8">
                         <div className="ps-5 pt-5 pe-5 mb-0 d-flex">
-                            <p className="mb-1 fs-2 fw-medium text-body-tertiary">Esfuerzo y creación.</p>
+                            <p className="mb-1 fs-2 fw-medium text-body-tertiary desplazado">Esfuerzo y creación.</p>
                         </div>
                         <div className="ps-5 pe-5 mt-0">
     <p className="fw-light text-center custom-paragraph">
@@ -153,13 +154,13 @@ export const Home = () => {
 
             <div className="line-separator"></div>
 
-            <div className="container-fluid bg-white">
+            <div className="container-fluid logocrea">
                 <div className="row">
-                    <div className="col-md-3 col-sm-6">
-                        <img src={creatutee} alt="CreaTuTee" className="img-fluid small-img" />
+                    <div className="col-md-3 col-sm-6 mt-2">
+                        <img src={creatutee2} alt="CreaTuTee" className="img-fluid small-img" />
                     </div>
 
-                    <div className="col-md-3 col-sm-6">
+                    <div className="col-md-3 col-sm-6 mt-3">
                         <u><strong><h4>Atención al cliente:</h4></strong></u>
                         <ul className="list-unstyled">
                             <li>Ayuda</li>
@@ -167,16 +168,16 @@ export const Home = () => {
                             <strong><li style={{ color: "blue" }}>+0 55 555 55 55</li></strong>
                         </ul>
                     </div>
-                    <div className="col-md-3 col-sm-6">
+                    <div className="col-md-3 col-sm-6 mt-3">
                         <u><strong><h4>Empresa:</h4></strong></u>
                         <ul className="list-unstyled">
                             <li>Cómo funciona</li>
                             <li>ECO friendly</li>
-                            <li>About Us</li>
+                            <li>Acerca de nosotros</li>
                             <strong><li onClick={handleShow} style={{ cursor: "pointer", color: "black" }}>Términos y Condiciones</li></strong>
                         </ul>
                     </div>
-                    <div className="col-md-3 col-sm-6">
+                    <div className="col-md-3 col-sm-6 mt-3">
                         <u><strong><h4>Síguenos:</h4></strong></u>
                         <ul className="list-unstyled">
                             <li>Instagram</li>

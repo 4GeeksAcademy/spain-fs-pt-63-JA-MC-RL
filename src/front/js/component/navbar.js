@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import CreaTuTeeLogo from "../../img/creatutee.jpg";
+import creatutee2 from "../../img/creatutee2.jpg";
 import './../../styles/navbar.css';
 import { FaShoppingCart } from "react-icons/fa";
 
@@ -19,7 +19,7 @@ export const Navbar = () => {
 
         <div className="navbar-left ms-5">
           <Link to="/" className="navbar-brand">
-            <img src={CreaTuTeeLogo} alt="CreaTuTee" className="navbar-logo" />
+            <img src={creatutee2} alt="CreaTuTee" className="navbar-logo" />
             <span className="navbar-title">CreaTuTee</span>
           </Link>
         </div>
@@ -40,21 +40,22 @@ export const Navbar = () => {
 
         <div className="collapse navbar-collapse" id="navbarContent">
           <ul className="navbar-nav mx-auto navbar-center">
-            <button className="btn btn-success nav-link">
-              <Link to="/home" className="nav-link">Inicio</Link>
-            </button>
-            <button className="nav-item btn btn-outline-success">
+            <button className="nav-item btn btn-custom2 nav-link">
+  <Link to="/home" className="nav-link">Inicio</Link>
+</button>
+
+            <button className="nav-item btn btn-custom nav-link">
               <a href="./desing" className="nav-link">DiseñaTuTee</a>
             </button>
-            <li className="nav-item btn btn-outline-success">
+            <button className="nav-item btn btn-outline">
               <a href="#how-it-works" className="nav-link">Cómo funciona</a>
-            </li>
-            <li className="nav-item btn btn-outline-success">
+            </button>
+            <button className="nav-item btn btn-outline">
               <a href="#eco-friendly" className="nav-link">EcoFriendly</a>
-            </li>
-            <li className="nav-item btn btn-outline-success">
+            </button>
+            <button className="nav-item btn btn-outline">
               <a href="#about-us" className="nav-link">Acerca de nosotros</a>
-            </li>
+            </button>
           </ul>
 
 
@@ -80,20 +81,20 @@ export const Navbar = () => {
             ) : (
               <>
                 <li className="nav-item">
-                  <Link to="/login" className="btn btn-success nav-link">
-                    <i className="fas fa-sign-in-alt"></i> Login
+                  <Link to="/login" className="btn btn- nav-link">
+                    <i className="fas fa-sign-in-alt"></i> Inicio de sesion
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/register" className="btn btn-outline-success nav-link">
-                    Register
+                  <Link to="/register" className="btn btn-outline-nav-link">
+                    Registro
                   </Link>
 
 
                 </li>
-                <p className="pago mt-3 ms-2">
-                  <FaShoppingCart size={30} />
-                </p>
+                <button className="carrito-button mt-1 ms-2">
+      <FaShoppingCart size={30} />
+    </button>
               </>
             )}
           </ul>
