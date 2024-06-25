@@ -1,7 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CreaTuTeeLogo from "../../img/creatutee.jpg";
-import './../../styles/navbar.css';  
+import './../../styles/navbar.css';
+import { FaShoppingCart } from "react-icons/fa";
 
 export const Navbar = () => {
   const token = localStorage.getItem('token');
@@ -13,17 +14,17 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light w-100">
+    <nav className="navbar navbar-expand-lg navbar-light w-100">
       <div className="container w-100">
-        {/* Logo y título */}
-        <div className="navbar-left">
+
+        <div className="navbar-left ms-5">
           <Link to="/" className="navbar-brand">
             <img src={CreaTuTeeLogo} alt="CreaTuTee" className="navbar-logo" />
             <span className="navbar-title">CreaTuTee</span>
           </Link>
         </div>
 
-        {/* Botón para colapsar en dispositivos móviles */}
+
         <button
           className="navbar-toggler"
           type="button"
@@ -36,11 +37,11 @@ export const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Elementos del navbar */}
+
         <div className="collapse navbar-collapse" id="navbarContent">
           <ul className="navbar-nav mx-auto navbar-center">
             <li className="nav-item">
-              <Link to="/home" className="nav-link">Home</Link>
+              <Link to="/home" className="nav-link">Inicio</Link>
             </li>
             <li className="nav-item">
               <a href="./desing" className="nav-link">DiseñaTuTee</a>
@@ -56,7 +57,7 @@ export const Navbar = () => {
             </li>
           </ul>
 
-          {/* Opciones a la derecha */}
+
           <ul className="navbar-nav ml-auto navbar-right">
             {token ? (
               <>
@@ -84,10 +85,15 @@ export const Navbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-    <Link to="/register" className="btn btn-outline-success nav-link">
-        Register
-    </Link>
-</li>
+                  <Link to="/register" className="btn btn-outline-success nav-link">
+                    Register
+                  </Link>
+
+
+                </li>
+                <p className="pago mt-3 ms-2">
+                  <FaShoppingCart size={30} />
+                </p>
               </>
             )}
           </ul>

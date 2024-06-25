@@ -1,5 +1,6 @@
 .navbar {
     width: 100%;
+    background-color: #ddeeff;
 }
 
 .navbar .container {
@@ -78,11 +79,11 @@
     }
 }
 .line-separator {
-    border-top: 1px solid #ddd; /* Color ligero */
+    border-top: 1px solid #ddd;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .bg-light-gray {
-    background-color: #f8f9fa; /* Color gris claro */
+    background-color: #f8f9fa; 
 }
