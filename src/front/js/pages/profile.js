@@ -1,55 +1,66 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../store/appContext';
-import './profile.css';
+import './../../styles/profile.css';
 
 const Profile = () => {
     const { store, actions } = useContext(Context);
 
-    // Estado inicial para los datos del usuario
     const [userData, setUserData] = useState({
         email: '',
-        firstName: '',
-        lastName: '',
-        phoneNumber: '',
+        first_name: '',
+        last_name: '',
+        phone_number: '',
         city: '',
         country: '',
-        postalCode: '',
+        postal_code: '',
         address1: '',
         address2: ''
     });
 
-    // Estado para controlar si se está editando cada campo
     const [isEditing, setIsEditing] = useState({
         email: false,
-        firstName: false,
-        lastName: false,
-        phoneNumber: false,
+        first_name: false,
+        last_name: false,
+        phone_number: false,
         city: false,
         country: false,
-        postalCode: false,
+        postal_code: false,
         address1: false,
         address2: false
     });
 
-    // Efecto para cargar los datos del usuario al montar el componente o cuando cambie store.user
+    // Cargar los datos del usuario desde store o localStorage
     useEffect(() => {
-        if (store.user) {
-            // Mapear los datos de store.user a userData
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        if (storedUser) {
+            setUserData({
+                email: storedUser.email || '',
+                first_name: storedUser.first_name || '',
+                last_name: storedUser.last_name || '',
+                phone_number: storedUser.phone_number || '',
+                city: storedUser.city || '',
+                country: storedUser.country || '',
+                postal_code: storedUser.postal_code || '',
+                address1: storedUser.address1 || '',
+                address2: storedUser.address2 || ''
+            });
+        } else if (store.user) {
             setUserData({
                 email: store.user.email || '',
-                firstName: store.user.first_name || '',
-                lastName: store.user.last_name || '',
-                phoneNumber: store.user.phone_number || '',
+                first_name: store.user.first_name || '',
+                last_name: store.user.last_name || '',
+                phone_number: store.user.phone_number || '',
                 city: store.user.city || '',
                 country: store.user.country || '',
-                postalCode: store.user.postal_code || '',
+                postal_code: store.user.postal_code || '',
                 address1: store.user.address1 || '',
                 address2: store.user.address2 || ''
             });
+        } else {
+            console.log('Usuario no autenticado o datos de usuario no disponibles.');
         }
     }, [store.user]);
 
-    // Función para manejar el cambio en los campos de entrada
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUserData(prevState => ({
@@ -58,7 +69,6 @@ const Profile = () => {
         }));
     };
 
-    // Función para alternar entre modo de edición y no edición para un campo específico
     const toggleEditing = (field) => {
         setIsEditing(prevState => ({
             ...prevState,
@@ -66,24 +76,26 @@ const Profile = () => {
         }));
     };
 
-    // Función para manejar el envío del formulario
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await actions.updateProfile(userData);
-            alert('¡Perfil actualizado correctamente!');
-            // Deshabilitar todos los modos de edición después de la actualización exitosa
-            setIsEditing({
-                email: false,
-                firstName: false,
-                lastName: false,
-                phoneNumber: false,
-                city: false,
-                country: false,
-                postalCode: false,
-                address1: false,
-                address2: false
-            });
+            if (store.user) {
+                await actions.updateProfile(userData);
+                alert('¡Perfil actualizado correctamente!');
+                setIsEditing({
+                    email: false,
+                    first_name: false,
+                    last_name: false,
+                    phone_number: false,
+                    city: false,
+                    country: false,
+                    postal_code: false,
+                    address1: false,
+                    address2: false
+                });
+            } else {
+                console.error('Error: store.user is null or empty. Usuario no autenticado o datos de usuario no disponibles.');
+            }
         } catch (error) {
             console.error('Error actualizando el perfil:', error);
             alert('Error al actualizar el perfil. Por favor, inténtalo de nuevo.');
@@ -96,7 +108,7 @@ const Profile = () => {
             <form onSubmit={handleSubmit} className="profile-form">
                 {Object.keys(userData).map(key => (
                     <div className="input-group" key={key}>
-                        <label>{key.charAt(0).toUpperCase() + key.slice(1)}:</label>
+                        <label>{key.charAt(0).toUpperCase() + key.slice(1).replace('_', ' ')}:</label>
                         <input
                             type="text"
                             name={key}

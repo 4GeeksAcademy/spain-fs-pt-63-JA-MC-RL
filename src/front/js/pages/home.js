@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
-import "./home.css"
+import "./../../styles/home.css";
 
 export const Home = () => {
     const { store } = useContext(Context);
