@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-import carrusel from "./../../img/carrusel.jpg";
+import carrusell from "./../../img/carrusell.jpg";
 import carrusel2 from "../../img/carrusel2.0.jpg";
 import carrusel3 from "../../img/carrusel3.jpg";
 import creatutee2 from "./../../img/creatutee2.jpg";
@@ -28,7 +28,7 @@ export const Home = () => {
                         <img src={carrusel2} className="d-block w-100" alt="First slide" />
                     </div>
                     <div className="carousel-item">
-                        <img src={carrusel} className="d-block w-100" alt="Second slide" />
+                        <img src={carrusell} className="d-block w-100" alt="Second slide" />
                     </div>
                     <div className="carousel-item">
                         <img src={carrusel3} className="d-block w-100" alt="Third slide" />

@@ -16,49 +16,41 @@ export const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light w-100">
       <div className="container w-100">
-
         <div className="navbar-left ms-5">
           <Link to="/" className="navbar-brand">
             <img src={creatutee2} alt="CreaTuTee" className="navbar-logo" />
             <span className="navbar-title">CreaTuTee</span>
           </Link>
         </div>
-
-
         <button
           className="navbar-toggler"
           type="button"
-          data-toggle="collapse"
-          data-target="#navbarContent"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
           aria-controls="navbarContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-
-
         <div className="collapse navbar-collapse" id="navbarContent">
           <ul className="navbar-nav mx-auto navbar-center">
-            <button className="nav-item btn btn-custom2 nav-link">
-  <Link to="/home" className="nav-link">Inicio</Link>
-</button>
-
-            <button className="nav-item btn btn-custom nav-link">
+            <li className="nav-item">
+              <Link to="/home" className="nav-link">Inicio</Link>
+            </li>
+            <li className="nav-item">
               <a href="./desing" className="nav-link">DiseñaTuTee</a>
-            </button>
-            <button className="nav-item btn btn-outline">
+            </li>
+            <li className="nav-item">
               <a href="#how-it-works" className="nav-link">Cómo funciona</a>
-            </button>
-            <button className="nav-item btn btn-outline">
+            </li>
+            <li className="nav-item">
               <a href="#eco-friendly" className="nav-link">EcoFriendly</a>
-            </button>
-            <button className="nav-item btn btn-outline">
+            </li>
+            <li className="nav-item">
               <a href="#about-us" className="nav-link">Acerca de nosotros</a>
-            </button>
+            </li>
           </ul>
-
-
           <ul className="navbar-nav ml-auto navbar-right">
             {token ? (
               <>
@@ -89,12 +81,12 @@ export const Navbar = () => {
                   <Link to="/register" className="btn btn-outline-nav-link">
                     Registro
                   </Link>
-
-
                 </li>
-                <button className="carrito-button mt-1 ms-2">
-      <FaShoppingCart size={30} />
-    </button>
+                <li className="nav-item">
+                  <button className="btn btn-outline carrito-button mt-1 ms-2">
+                    <FaShoppingCart size={30} />
+                  </button>
+                </li>
               </>
             )}
           </ul>
