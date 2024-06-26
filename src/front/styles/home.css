@@ -5,3 +5,45 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
+
+.imagenredonda {
+    max-width: 100%;
+    height: 200px;
+    width: 200px;
+}
+
+.carousel-inner {
+    max-height: 600px;
+    object-fit: cover;
+}
+
+.carousel-item {
+    max-height: 600px;
+    object-fit: cover;
+}
+
+.carousel-item {
+    max-height: 600px;
+    object-fit: cover;
+}
+
+/* home.css */
+.small-img {
+    max-width: 180px; 
+    height: auto; 
+    margin: 0 auto; 
+}
+
+/* styles.css */
+
+.custom-paragraph {
+    font-size: 1.2rem; /* Ajusta este valor según tus necesidades */
+}
+
+.desplazado {
+    margin-left: 20px; /* Ajusta el valor según lo necesites */
+}
+
+
+
+
