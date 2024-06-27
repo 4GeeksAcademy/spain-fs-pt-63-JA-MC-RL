@@ -16,12 +16,14 @@ export const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light w-100">
       <div className="container w-100">
+
         <div className="navbar-left ms-5">
           <Link to="/" className="navbar-brand">
             <img src={creatutee2} alt="CreaTuTee" className="navbar-logo" />
             <span className="navbar-title">CreaTuTee</span>
           </Link>
         </div>
+
         <button
           className="navbar-toggler"
           type="button"
@@ -33,22 +35,24 @@ export const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+
         <div className="collapse navbar-collapse" id="navbarContent">
           <ul className="navbar-nav mx-auto navbar-center">
-            <li className="nav-item">
-              <Link to="/home" className="nav-link">Inicio</Link>
+            <li className="nav-item custom-nav-item">
+              <Link to="/home" className="nav-link custom-nav-link">Inicio</Link>
             </li>
-            <li className="nav-item">
-              <a href="./desing" className="nav-link">DiseñaTuTee</a>
+            <li className="nav-item custom-nav-item">
+              <a href="./desing" className="nav-link custom-nav-link">DiseñaTuTee</a>
             </li>
-            <li className="nav-item">
-              <a href="#how-it-works" className="nav-link">Cómo funciona</a>
+
+            <li className="nav-item custom-nav-item">
+              <a href="#comofunciona" className="nav-link custom-nav-link">Como funciona</a>
             </li>
-            <li className="nav-item">
-              <a href="#eco-friendly" className="nav-link">EcoFriendly</a>
+            <li className="nav-item custom-nav-item">
+              <a href="#ecofriendly" className="nav-link custom-nav-link">EcoFriendly</a>
             </li>
-            <li className="nav-item">
-              <a href="#about-us" className="nav-link">Acerca de nosotros</a>
+            <li className="nav-item custom-nav-item">
+              <a href="#aboutus" className="nav-link custom-nav-link">Acerca de nosotros</a>
             </li>
           </ul>
           <ul className="navbar-nav ml-auto navbar-right">
