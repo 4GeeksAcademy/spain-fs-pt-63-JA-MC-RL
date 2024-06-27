@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './../../styles/checkout.css'; // Asegúrate de importar los estilos adecuadamente
-import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 const Checkout = () => {
     const [checkoutItems, setCheckoutItems] = useState([]);
