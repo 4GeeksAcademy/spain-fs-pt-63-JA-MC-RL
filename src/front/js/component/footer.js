@@ -3,10 +3,6 @@ import './../../styles/footer.css';
 
 export const Footer = () => (
 
-
-
-
-    
     <footer id="footer" className="footer-custom">
         <div className="row">
             <div className="col-lg-12 d-flex justify-content-center">
