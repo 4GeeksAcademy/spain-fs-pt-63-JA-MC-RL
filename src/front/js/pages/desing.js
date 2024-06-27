@@ -26,14 +26,16 @@ const Design = () => {
         RED: 'https://assets.wordans.es/files/model_specifications/2016/6/16/278022/278022_big.jpg?1673455520',
         BLUE: 'https://assets.wordans.es/files/model_specifications/2016/6/16/278016/278016_big.jpg?1673455527',
         WHITE: 'https://assets.wordans.es/files/model_specifications/2016/6/16/277995/277995_big.jpg?1673455570',
-        PURPLE: 'https://assets.wordans.es/files/model_specifications/2016/6/16/278079/278079_big.jpg?1673455560'
+        PURPLE: 'https://assets.wordans.es/files/model_specifications/2016/6/16/278079/278079_big.jpg?1673455560',
+        BLACK: 'https://assets.wordans.es/files/model_specifications/2011/6/29/6825/6825_big.jpg?1674148335'
       },
       descriptions: {
         GREEN: 'green',
         RED: 'red',
         BLUE: 'blue',
         WHITE: 'white',
-        PURPLE: 'purple'
+        PURPLE: 'purple',
+        BLACK: 'black',
       },
       sizes: {
         SMALL: {
@@ -170,6 +172,12 @@ const Design = () => {
                         onClick={() => handleColorChange('PURPLE')}
                       >
                       </button>
+                      <button
+                        className={`color-option ${selectedColor === 'BLACK' ? 'active' : ''}`}
+                        style={{ backgroundColor: 'black' }}
+                        onClick={() => handleColorChange('BLACK')}
+                      >
+                      </button>
                     </div>
                   </div>
                   <div className='mt-4'>
@@ -180,7 +188,7 @@ const Design = () => {
               </div>
             </div>
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div className="modal-dialog">
+              <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                   <div className="modal-header">
                     <h1 className="modal-title fs-5" id="exampleModalLabel">Selecciona una imagen personalizada</h1>
@@ -203,6 +211,20 @@ const Design = () => {
             </div>
           </React.Fragment>
         ))}
+      </div>
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Accordion Item #1
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

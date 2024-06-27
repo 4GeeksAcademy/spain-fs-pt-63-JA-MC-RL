@@ -37,11 +37,13 @@
       img.custom-img-detail {
         position: absolute;
         transform: translateX(-50%);
-        left: 50%;
-        width: 100px;
+        left: 51%;
+        width: 150px;
         top: 24%;
         z-index: 10;
-        opacity: 0.8;
+        opacity: 3;
+        mix-blend-mode:screen;
+        border-radius: 50px;
       }
     }
     .cont-prod-details-box {

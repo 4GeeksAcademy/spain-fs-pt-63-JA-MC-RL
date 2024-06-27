@@ -73,14 +73,18 @@
 		]
 	},
 	"dependencies": {
+		"@paypal/react-paypal-js": "^8.5.0",
 		"axios": "^1.7.2",
 		"bootstrap": "^5.3.3",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",
 		"react-dom": "^16.8.4",
+
+		"react-draggable": "^4.4.6",
+
 		"react-icons": "^5.2.1",
 		"react-polyfills": "0.0.1",
 		"react-resizable": "^3.0.5",
-		"react-router-dom": "^6.3.0"
+		"react-router-dom": "^6.24.0"
 	}
 }

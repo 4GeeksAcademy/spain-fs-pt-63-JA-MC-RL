@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { useNavigate } from "react-router-dom";
-import "./login.css"
+import "./../../styles/login.css";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -45,6 +45,7 @@ const Login = () => {
                 />
                 <button type="button" onClick={handleLogin} className="login-button">Entrar</button>
             </form>
+            <p>No tienes una cuenta? <Link to="/register">Regístrate aquí</Link></p>
         </div>
     );
 };

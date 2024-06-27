@@ -10,21 +10,47 @@ const Cart = () => {
   useEffect(() => {
     const storedProduct = localStorage.getItem('selectedProduct');
     if (storedProduct) {
-      setCartItems([JSON.parse(storedProduct)]);
-      calculateTotalPrice(storedProduct); // Calcular el precio total basado en la talla
+      const product = JSON.parse(storedProduct);
+      setCartItems([product]);
+      calculateTotalPrice([product]); // Calcular el precio total basado en la talla y cantidad
     }
   }, []);
 
-  const calculateTotalPrice = (product) => {
-    if (product && product.size && product.quantity) {
+  const calculateTotalPrice = (products) => {
+    let total = 0;
+    products.forEach(product => {
+      if (product && product.size && product.quantity) {
         const sizePrice = parseFloat(product.sizes[product.size].price); // Obtener el precio de la talla seleccionada
-        const total = (sizePrice * product.quantity).toFixed(2);
-        setTotalPrice(total);
-    }
-};
+        total += sizePrice * product.quantity; // Sumar al total el precio multiplicado por la cantidad
+      }
+    });
+    setTotalPrice(total.toFixed(2));
+  };
+
+  const handleQuantityChange = (index, newQuantity) => {
+    const updatedCartItems = [...cartItems];
+    updatedCartItems[index].quantity = parseInt(newQuantity, 10);
+    setCartItems(updatedCartItems);
+    localStorage.setItem('selectedProduct', JSON.stringify(updatedCartItems[0]));
+    calculateTotalPrice(updatedCartItems);
+  };
+
+  const handleColorChange = (index, newColor) => {
+    const updatedCartItems = [...cartItems];
+    updatedCartItems[index].color = newColor;
+    setCartItems(updatedCartItems);
+    localStorage.setItem('selectedProduct', JSON.stringify(updatedCartItems[0]));
+  };
+
+  const handleSizeChange = (index, newSize) => {
+    const updatedCartItems = [...cartItems];
+    updatedCartItems[index].size = newSize;
+    setCartItems(updatedCartItems);
+    localStorage.setItem('selectedProduct', JSON.stringify(updatedCartItems[0]));
+    calculateTotalPrice(updatedCartItems);
+  };
 
   const handleCheckout = () => {
-    // Lógica para realizar la compra
     navigate('/checkout');
   };
 
@@ -43,17 +69,64 @@ const Cart = () => {
               )}
               <div className="cart-item-details">
                 <h2>{item.name}</h2>
-                <p>Color: {item.color}</p>
-                <p>Talla: {item.size}</p>
-                <p>Cantidad: {item.quantity}</p>
-                <p>Precio: ${item.price}</p>
+
+                {/* Formulario para editar la cantidad */}
+                <div className="cart-edit">
+                  <label htmlFor={`quantity-${index}`}>Cantidad:</label>
+                  <input
+                    type="number"
+                    id={`quantity-${index}`}
+                    value={item.quantity}
+                    min="1"
+                    onChange={(e) => handleQuantityChange(index, e.target.value)}
+                  />
+                </div>
+
+                {/* Formulario para editar el color */}
+                <div className="cart-edit">
+                  <label htmlFor={`color-${index}`}>Color:</label>
+                  <select
+                    id={`color-${index}`}
+                    value={item.color}
+                    onChange={(e) => handleColorChange(index, e.target.value)}
+                  >
+                    {Object.keys(item.image_urls).map((color) => (
+                      <option key={color} value={color}>
+                        {color}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Formulario para editar la talla */}
+                <div className="cart-edit">
+                  <label htmlFor={`size-${index}`}>Talla:</label>
+                  <select
+                    id={`size-${index}`}
+                    value={item.size}
+                    onChange={(e) => handleSizeChange(index, e.target.value)}
+                  >
+                    {Object.keys(item.sizes).map((size) => (
+                      <option key={size} value={size}>
+                        {size}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <p>Precio: ${item.sizes[item.size].price}</p>
               </div>
             </div>
           ))}
         </div>
       )}
       {cartItems.length > 0 && (
-        <button onClick={handleCheckout}>Realizar Compra</button>
+        <>
+          <div className="total-price">
+            Precio Total: ${totalPrice}
+          </div>
+          <button onClick={handleCheckout} className="checkout-button">Realizar Compra</button>
+        </>
       )}
     </div>
   );

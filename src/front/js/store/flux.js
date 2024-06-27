@@ -3,10 +3,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         store: {
             message: null,
             token: localStorage.getItem('token') || null,
-            user: null,
+            user: JSON.parse(localStorage.getItem('user')) || null,
             products: [],
             cart: [],
-            customImages: []
+            customImages: [],
+            isLoggedIn: localStorage.getItem('token') ? true : false,
         },
         actions: {
             // Obtener mensaje desde el backend
@@ -34,25 +35,29 @@ const getState = ({ getStore, getActions, setStore }) => {
                         },
                         body: JSON.stringify({ email, password })
                     });
-        
+
                     if (!resp.ok) {
                         throw new Error("Login failed");
                     }
-        
+
                     const data = await resp.json();
                     const token = data.token;
                     const user = data.user;
-        
-                    setStore({ token, user }); // Actualiza el estado global con el token y el usuario
+
+                    if (!token || !user) {
+                        throw new Error("Login response missing token or user data");
+                    }
+
+                    setStore({ token, user });
                     localStorage.setItem('token', token);
-        
+                    localStorage.setItem('user', JSON.stringify(user));
+
                     return true;
                 } catch (error) {
                     console.error("Error during login:", error);
                     return false;
                 }
             },
-            
 
             // Registrar nuevo usuario
             register: async ({ email, password, firstName, lastName, phoneNumber, city, country, postalCode, address1, address2 }) => {
@@ -97,38 +102,49 @@ const getState = ({ getStore, getActions, setStore }) => {
             updateProfile: async (userData) => {
                 try {
                     const store = getStore();
-                    const userId = store.user.id;  // Asegúrate de que estás obteniendo el id del usuario de manera correcta
-            
+                    const userId = store.user?.id;
+
+                    if (!userId) {
+                        throw new Error('User ID is not defined.');
+                    }
+
                     const resp = await fetch(`${process.env.BACKEND_URL}/api/user/${userId}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${store.token}`  // Asegúrate de que el token es correcto
+                            'Authorization': `Bearer ${store.token}`
                         },
                         body: JSON.stringify(userData)
                     });
-            
+
                     if (!resp.ok) {
+                        const errorData = await resp.json();
+                        console.error('Server response:', errorData);
                         throw new Error('Failed to update profile');
                     }
-            
+
                     const updatedUserData = await resp.json();
-            
+
                     setStore(prevState => ({
                         ...prevState,
                         user: {
                             ...prevState.user,
-                            ...updatedUserData  // Actualiza todos los campos del usuario con los datos recibidos del backend
+                            ...updatedUserData
                         }
                     }));
-            
+
+                    localStorage.setItem('user', JSON.stringify({
+                        ...store.user,
+                        ...updatedUserData
+                    }));
+
                     return true;
                 } catch (error) {
-                    console.error('Error updating profile:', error);
+                    console.error('Error updating profile:', error.message || error);
+                    alert(`Error updating profile: ${error.message || 'Unknown error'}`);
                     throw error;
                 }
             },
-           
 
             // Cerrar sesión
             logout: () => {
@@ -169,22 +185,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-            fetchCustomImages: async () => {
-                try {
-                    const response = await fetch('https://picsum.photos/v2/list?limit=5');
-                    if (!response.ok) {
-                        throw new Error("Failed to fetch images");
-                    }
-                    const images = await response.json();
-                    const imageUrls = images.map(img => `https://picsum.photos/id/${img.id}/200/200`);
-                    setStore({ customImages: imageUrls });
-                } catch (error) {
-                    console.error("Error fetching images:", error);
-                }
-            },
-            
-
-                        // Obtener productos
+            // Obtener productos
             getProducts: async () => {
                 try {
                     const resp = await fetch(`${process.env.BACKEND_URL}/api/products`);
@@ -203,7 +204,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             // Agregar producto al carrito
             addToCart: (product) => {
                 const store = getStore();
-                setStore({ cart: [...store.cart, product] });
+                if (store.isLoggedIn) {
+                    setStore({ cart: [...store.cart, product] });
+                } else {
+                    alert('Debes iniciar sesión para agregar productos al carrito.');
+                    // Puedes redirigir a la página de login u otra acción aquí
+                }
             },
 
             // Eliminar producto del carrito
@@ -216,7 +222,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             // Crear pedido
             createOrder: async (orderData) => {
                 try {
-                    const token = getStore().token;
+                    const store = getStore();
+                    if (!store.isLoggedIn) {
+                        throw new Error('Debes iniciar sesión para proceder con la compra.');
+                    }
+
+                    const token = store.token;
                     const resp = await fetch(`${process.env.BACKEND_URL}/api/order`, {
                         method: 'POST',
                         headers: {
@@ -237,7 +248,22 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log("Error creating order:", error);
                     return false;
                 }
-            }
+            },
+
+            // Obtener imágenes personalizadas
+            fetchCustomImages: async () => {
+                try {
+                    const response = await fetch('https://picsum.photos/v2/list?limit=100');
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch images");
+                    }
+                    const images = await response.json();
+                    const imageUrls = images.map(img => `https://picsum.photos/id/${img.id}/200/200`);
+                    setStore({ customImages: imageUrls });
+                } catch (error) {
+                    console.error("Error fetching images:", error);
+                }
+            },
         }
     };
 };
