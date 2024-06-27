@@ -1,0 +1,134 @@
+.navbar {
+    width: 100%;
+    background-color: #ddeeff;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-left,
+.navbar-center,
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-left {
+    justify-content: center;
+}
+
+.navbar-center {
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.navbar-right {
+    justify-content: flex-end;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    max-height: 70px; 
+    margin-right: 10px;
+}
+
+.navbar-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.nav-item {
+    margin: 0 10px;
+}
+
+.nav-link {
+    color: #000;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+.nav-link:hover {
+    color: #9bf8c2;
+}
+
+.btn {
+    padding: 5px 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+@media (max-width: 992px) {
+    .navbar-center {
+        order: 2; 
+    }
+
+    .navbar-right {
+        order: 3;
+    }
+}
+.line-separator {
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.bg-light-gray {
+    background-color: #f8f9fa; 
+}
+.logocrea{
+    background-color: #ddeeff;
+}
+
+/* Archivo: home.css */
+
+.btn-custom {
+    background-color: #ddeeff; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Relleno del botón */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 1.3s ease; /* Transición suave */
+  }
+  
+  .btn-custom:hover {
+    background-color:  #bee73a; /* Color de fondo al pasar el cursor */
+    color: white; /* Color del texto al pasar el cursor */
+  }
+
+  .btn-custom2 {
+    background-color:#ddeeff; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border:none; /* Sin borde */
+    padding: 8px 30px; /* Relleno del botón */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 1.3s ease; /* Transición suave */
+  }
+
+  .btn-custom2:hover {
+    background-color:  #9ee1fb; /* Color de fondo al pasar el cursor */
+    color: white; /* Color del texto al pasar el cursor */
+  }
+
+  .carrito-button {
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    padding: 0; /* Sin relleno */
+    cursor: pointer; /* Cursor de puntero */
+  }
+  
+  .carrito-button:hover {
+    color: #3c9ccc; /* Color al pasar el cursor */
+  }
+  
