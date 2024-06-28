@@ -1,0 +1,18 @@
+
+
+
+/* Estilos CSS para el modal */
+.modal-body {
+    background-color: #f0f0f0; /* Color de fondo del modal */
+    color: #333; /* Color del texto dentro del modal */
+    padding: 20px; /* Espaciado interno dentro del modal */
+    border-radius: 10px; /* Bordes redondeados del modal */
+}
+
+.modal-body p {
+    margin-bottom: 15px; /* Espaciado entre párrafos dentro del modal */
+}
+
+.modal-body strong {
+    color: #5a4040; /* Color para los elementos strong (negritas) dentro del modal */
+}

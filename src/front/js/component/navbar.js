@@ -42,13 +42,13 @@ export const Navbar = () => {
               <a href="./desing" className="nav-link">DiseñaTuTee</a>
             </li>
             <li className="nav-item">
-              <a href="#how-it-works" className="nav-link">Cómo funciona</a>
+              <a href="#comofunciona" className="nav-link">Como funciona</a>
             </li>
             <li className="nav-item">
-              <a href="#eco-friendly" className="nav-link">EcoFriendly</a>
+              <a href="#ecofriendly" className="nav-link">EcoFriendly</a>
             </li>
             <li className="nav-item">
-              <a href="#about-us" className="nav-link">Acerca de nosotros</a>
+              <a href="#acercadenosotros" className="nav-link">Acerca de nosotros</a>
             </li>
           </ul>
           <ul className="navbar-nav ml-auto navbar-right">

@@ -1,9 +1,13 @@
 .navbar {
     width: 100%;
     background-color: #ddeeff;
+    position: sticky;
+    top: 0;
+    width: 100%;
 }
 
 .navbar .container {
+    
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -38,7 +42,7 @@
 }
 
 .navbar-logo {
-    max-height: 70px; 
+    max-height: 40px; 
     margin-right: 10px;
 }
 
@@ -60,7 +64,7 @@
 }
 
 .nav-link:hover {
-    color: #9bf8c2;
+    color: #034cf8;
 }
 
 .btn {
