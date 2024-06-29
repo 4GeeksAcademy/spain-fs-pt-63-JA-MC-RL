@@ -34,7 +34,7 @@ const Register = () => {
 
         // Si el registro es exitoso, redirige a la ruta "home"
         if (registrationSuccess) {
-            navigate('/home'); // Reemplaza "/home" con la ruta adecuada en tu aplicación
+            navigate('/'); // Reemplaza "/home" con la ruta adecuada en tu aplicación
         } else {
             // Manejar el error, mostrar mensaje, etc.
             console.log("Registration failed");

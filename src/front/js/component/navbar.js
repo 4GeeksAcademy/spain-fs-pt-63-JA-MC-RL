@@ -14,7 +14,7 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light w-100">
+    <nav className="navbar navbar-expand-lg navbar-light w-100 fixed-top">
       <div className="container w-100">
         <div className="navbar-left ms-5">
           <Link to="/" className="navbar-brand">
@@ -35,20 +35,20 @@ export const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarContent">
           <ul className="navbar-nav mx-auto navbar-center">
-            <li className="nav-item">
-              <Link to="/home" className="nav-link">Inicio</Link>
+            <li className="nav-item cuadro">
+              <Link to="/" className="nav-link">Inicio</Link>
             </li>
             <li className="nav-item">
               <a href="./desing" className="nav-link">DiseñaTuTee</a>
             </li>
             <li className="nav-item">
-              <a href="#how-it-works" className="nav-link">Cómo funciona</a>
+            <Link to="/" className="nav-link">Como funciona</Link>
             </li>
             <li className="nav-item">
-              <a href="#eco-friendly" className="nav-link">EcoFriendly</a>
+            <Link to="/" className="nav-link">EcoFriendly</Link>
             </li>
             <li className="nav-item">
-              <a href="#about-us" className="nav-link">Acerca de nosotros</a>
+            <Link to="/" className="nav-link">Acerca de nosotros</Link>
             </li>
           </ul>
           <ul className="navbar-nav ml-auto navbar-right">
@@ -56,17 +56,17 @@ export const Navbar = () => {
               <>
                 <li className="nav-item">
                   <Link to="/profile" className="nav-link">
-                    <i className="fas fa-user"></i> Profile
+                    <i className="fas fa-user"></i> Perfil
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link to="/cart" className="nav-link">
-                    <i className="fas fa-shopping-cart"></i> Cart
+                    <i className="fas fa-shopping-cart"></i> Carrito
                   </Link>
                 </li>
                 <li className="nav-item">
                   <button onClick={handleLogout} className="btn btn-link nav-link">
-                    Logout
+                    Cerrar sesion
                   </button>
                 </li>
               </>
@@ -74,7 +74,7 @@ export const Navbar = () => {
               <>
                 <li className="nav-item">
                   <Link to="/login" className="btn btn- nav-link">
-                    <i className="fas fa-sign-in-alt"></i> Inicio de sesion
+                    <i className="fas fa-sign-in-alt"></i> Iniciar sesion
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -84,7 +84,7 @@ export const Navbar = () => {
                 </li>
                 <li className="nav-item">
                   <button className="btn btn-outline carrito-button mt-1 ms-2">
-                    <FaShoppingCart size={30} />
+                    <FaShoppingCart size={25} />
                   </button>
                 </li>
               </>

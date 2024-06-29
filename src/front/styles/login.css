@@ -5,6 +5,8 @@
     justify-content: center;
     height: 100vh;
     background-color: #f0f0f0; /* Color de fondo */
+    position: relative;
+    top: -0,5px;
 }
 
 .login-form {
@@ -78,4 +80,49 @@
 
 .login-footer a:hover {
     color: #0056b3; /* Color del enlace al pasar el mouse */
+}
+
+.login-form {
+    width: 100%;
+    max-width: 400px; /* Aumenta el ancho máximo del formulario */
+    margin: 0 auto; /* Centra el formulario horizontalmente */
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px #706c6cda;
+    background-color: #f9f9f9; /* Color de fondo del formulario */
+    margin-bottom: 25px;
+    margin-top: 15px;
+    
+}
+
+.login-input {
+    width: 100%; /* Asegura que los inputs ocupen todo el ancho del formulario */
+    margin-bottom: 15px; /* Espacio entre los campos */
+    padding: 8px; /* Aumenta el padding para agrandar el campo */
+    font-size: 20px; /* Aumenta el tamaño de la fuente */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Incluye el padding y borde en el ancho total */
+}
+
+.login-button {
+    width: 100%; /* Asegura que el botón ocupe todo el ancho del formulario */
+    padding: 15px; /* Aumenta el padding para agrandar el botón */
+    font-size: 18px; /* Aumenta el tamaño de la fuente */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: #0056b3;
+
+}
+
+.login-title {
+    text-shadow: 2px 2px 4px #706c6cda;
 }
