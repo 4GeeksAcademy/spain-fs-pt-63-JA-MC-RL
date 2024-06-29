@@ -1,0 +1,124 @@
+.navbar {
+    width: 100%;
+    background-color: #ddeeff;
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+.navbar .container {
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-left,
+.navbar-center,
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-left {
+    justify-content: center;
+}
+
+.navbar-center {
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.navbar-right {
+    justify-content: flex-end;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    max-height: 40px; 
+    margin-right: 10px;
+}
+
+.navbar-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.nav-item {
+    margin: 0 10px;
+}
+
+.nav-link {
+    color: #000;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+.nav-link:hover {
+    color: #034cf8;
+}
+
+.btn {
+    padding: 5px 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+@media (max-width: 992px) {
+    .navbar-center {
+        order: 2; 
+    }
+
+    .navbar-right {
+        order: 3;
+    }
+}
+.line-separator {
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.bg-light-gray {
+    background-color: #f8f9fa; 
+}
+.logocrea{
+    background-color: #ddeeff;
+}
+
+/* Archivo: home.css */
+
+
+
+  .carrito-button {
+    background: none; 
+    border: none;
+    padding: 0; 
+    cursor: pointer;
+    color: rgb(73, 71, 71);
+  }
+  
+  .carrito-button:hover {
+    color: #3c9ccc; 
+  }
+  .custom-nav-item .custom-nav-link {
+    color: #000;
+    transition: background-color 0.3s, color 0.3s, border-radius 0.3s, transform 0.3s;
+    border-radius: 5px;
+}
+
+.custom-nav-item .custom-nav-link:hover {
+    background-color: #034cf8; /* Fondo al pasar el cursor */
+    color: #fff; /* Color del texto al pasar el cursor */
+    border-radius: 10px;
+  }
+
