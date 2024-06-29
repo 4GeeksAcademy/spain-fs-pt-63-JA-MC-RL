@@ -1,15 +1,7 @@
-/*
-    home.css: This website contains selectors only used in home.css
-
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
-
 .imagenredonda {
     max-width: 100%;
-    height: 200px;
-    width: 200px;
+    height: 340px;
+    width: 340px;
 }
 
 .carousel-inner {
@@ -43,3 +35,13 @@
 .desplazado {
     margin-left: 20px; /* Ajusta el valor según lo necesites */
 }
+
+.text-justify {
+    text-align: justify;
+}
+.line-separator1 {
+    height: 2px; /* Ajusta la altura de la línea */
+    width: 100%; /* Ajusta el ancho de la línea */
+    background-color: white; /* Color blanco */
+    margin: 20px 0; /* Margen superior e inferior */
+  }

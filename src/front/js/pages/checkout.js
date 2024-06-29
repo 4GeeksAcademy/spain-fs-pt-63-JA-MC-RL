@@ -77,21 +77,6 @@ const Checkout = () => {
                         <h3>Total a Pagar: ${totalPrice}</h3>
                         <button onClick={handleCheckout}>Comprar</button>
                     </div>
-                    <PayPalScriptProvider options={{ 'client-id': 'TU_CLIENT_ID_DE_PAYPAL' }}>
-                        <PayPalButtons
-                            createOrder={(data, actions) => {
-                                return actions.order.create({
-                                    purchase_units: [{
-                                        amount: {
-                                            value: totalPrice
-                                        }
-                                    }]
-                                });
-                            }}
-                            onApprove={handleApprove}
-                            onCancel={handleCheckoutCancel}
-                        />
-                    </PayPalScriptProvider>
                 </>
             )}
         </div>
