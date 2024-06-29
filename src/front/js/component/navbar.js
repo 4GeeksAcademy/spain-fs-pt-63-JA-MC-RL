@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import creatutee2 from "../../img/creatutee2.jpg";
-import './../../styles/navbar.css';
 import { FaShoppingCart } from "react-icons/fa";
+import "./../../styles/navbar.css";
 
 export const Navbar = () => {
   const token = localStorage.getItem('token');

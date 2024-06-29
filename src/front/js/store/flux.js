@@ -19,7 +19,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                             'Content-Type': 'application/json'
                         }
                     });
-            
                     if (!resp.ok) {
                         throw new Error("Failed to fetch message");
                     }
@@ -68,6 +67,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             // Registrar nuevo usuario
             register: async ({ email, password, firstName, lastName, phoneNumber, city, country, postalCode, address1, address2 }) => {
                 try {
+                    // Validación básica de datos
+                    if (!email || !password || !firstName || !lastName || !phoneNumber || !city || !country || !postalCode || !address1) {
+                        throw new Error('Todos los campos son obligatorios');
+                    }
+            
                     const resp = await fetch(`${process.env.BACKEND_URL}/api/user`, {
                         method: 'POST',
                         headers: {
@@ -88,21 +92,23 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
             
                     if (!resp.ok) {
-                        throw new Error("Registration failed");
+                        throw new Error('La registración falló');
                     }
             
                     const data = await resp.json();
                     const token = data.token;
             
+                    // Actualizar el estado global y localStorage con el token
                     setStore({ token });
                     localStorage.setItem('token', token);
             
                     return true;
                 } catch (error) {
-                    console.log("Error during registration:", error);
+                    console.error('Error durante el registro:', error);
                     return false;
                 }
             },
+            
 
             // Actualizar perfil del usuario
             updateProfile: async (userData) => {

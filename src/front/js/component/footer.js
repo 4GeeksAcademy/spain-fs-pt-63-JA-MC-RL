@@ -11,6 +11,7 @@ import { FaFacebookSquare } from "react-icons/fa";
 import creatutee2 from "./../../img/creatutee2.jpg";
 import { Link, useNavigate } from "react-router-dom";
 
+
 export const Footer = () => {
 
     const { store, actions } = useContext(Context);

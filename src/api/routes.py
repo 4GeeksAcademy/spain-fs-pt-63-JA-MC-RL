@@ -6,19 +6,14 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required, ge
 import os
 
 api = Blueprint('api', __name__)
-
-api = Blueprint('api', __name__)
 # Allow CORS requests to this API
-CORS(api, resources={r"/*": {"origins": ["https://musical-space-goggles-r4grvv9q5wrjhp9gr-3000.app.github.dev", "https://musical-space-goggles-r4grvv9q5wrjhp9gr-3001.app.github.dev"]}})
+CORS(api, resources={r"/*": {"origins": ["https://silver-fiesta-g44vq7qj7rg9cvg67-3000.app.github.dev", "https://silver-fiesta-g44vq7qj7rg9cvg67-3001.app.github.dev"]}})
 @api.after_request
 def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
     response.headers['Access-Control-Allow-Methods'] = 'GET,PUT,POST,DELETE'
     return response
-
-# Allow CORS requests to this API
-CORS(api)
 
 @api.before_app_request
 def create_tables():

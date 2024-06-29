@@ -110,18 +110,15 @@
   .carrito-button:hover {
     color: #3c9ccc; 
   }
-  
-  /* Archivo: navbar.css */
+  .custom-nav-item .custom-nav-link {
+    color: #000;
+    transition: background-color 0.3s, color 0.3s, border-radius 0.3s, transform 0.3s;
+    border-radius: 5px;
+}
 
-/* Estilo para el estado normal */
-.custom-nav-item .custom-nav-link {
-    color: #000; 
-    transition: background-color 0.01s, color 0.01s; 
-  }
-  
-  /* Estilo para el estado hover */
-  .custom-nav-item .custom-nav-link:hover {
-    background-color: #bee73a; /* Fondo al pasar el cursor */
+.custom-nav-item .custom-nav-link:hover {
+    background-color: #034cf8; /* Fondo al pasar el cursor */
     color: #fff; /* Color del texto al pasar el cursor */
     border-radius: 10px;
   }
+
