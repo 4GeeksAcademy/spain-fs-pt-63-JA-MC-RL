@@ -63,7 +63,6 @@ const Register = () => {
                 address1,
                 address2
             });
-
             // Si el registro es exitoso, redirige a la ruta "home"
             if (registrationSuccess) {
                 navigate('/');

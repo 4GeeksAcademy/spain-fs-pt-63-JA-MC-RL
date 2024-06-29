@@ -22,6 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (!resp.ok) {
                         throw new Error("Failed to fetch message");
                     }
+            
                     const data = await resp.json();
                     console.log(data.message);
                 } catch (error) {
@@ -77,16 +78,16 @@ const getState = ({ getStore, getActions, setStore }) => {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            email,
-                            password,
+                            email: email,
+                            password: password,
                             first_name: firstName,
                             last_name: lastName,
                             phone_number: phoneNumber,
-                            city,
-                            country,
+                            city: city,
+                            country: country,
                             postal_code: postalCode,
-                            address1,
-                            address2
+                            address1: address1,
+                            address2: address2
                         })
                     });
             

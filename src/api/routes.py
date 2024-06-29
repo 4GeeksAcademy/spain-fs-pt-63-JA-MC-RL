@@ -15,7 +15,6 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Methods'] = 'GET,PUT,POST,DELETE'
     return response
 
-
 @api.before_app_request
 def create_tables():
     db.create_all()

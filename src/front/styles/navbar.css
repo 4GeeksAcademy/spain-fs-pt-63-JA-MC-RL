@@ -103,7 +103,8 @@
     background: none; 
     border: none;
     padding: 0; 
-    cursor: pointer; 
+    cursor: pointer;
+    color: rgb(73, 71, 71);
   }
   
   .carrito-button:hover {
@@ -118,7 +119,6 @@
 .custom-nav-item .custom-nav-link:hover {
     background-color: #034cf8; /* Fondo al pasar el cursor */
     color: #fff; /* Color del texto al pasar el cursor */
-    border-radius: 10px; /* Aumentamos el radio del borde para un efecto más suave */
-    transform: scale(1.1); /* Efecto de escala al pasar el cursor */
-}
-  
+    border-radius: 10px;
+  }
+

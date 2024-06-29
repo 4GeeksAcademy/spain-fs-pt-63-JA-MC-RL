@@ -9,6 +9,8 @@ import { TiSocialTwitter } from "react-icons/ti";
 import { TiSocialInstagram } from "react-icons/ti";
 import { FaFacebookSquare } from "react-icons/fa";
 import creatutee2 from "./../../img/creatutee2.jpg";
+import { Link, useNavigate } from "react-router-dom";
+
 
 export const Footer = () => {
 
@@ -52,9 +54,9 @@ export const Footer = () => {
                 <div className="col-md-3 col-sm-6 mt-3">
                     <u><strong><h4>Empresa:</h4></strong></u>
                     <ul className="list-unstyled">
-                        <a href="#comofunciona" className="nav-link">Como funciona</a>
-                        <a href="#ecofriendly" className="nav-link">EcoFriendly</a>
-                        <a href="#acercadenosotros" className="nav-link">Acerca de nosotros</a>
+                        <Link to="/" className="nav-link">Como funciona</Link>
+                        <Link to="/" className="nav-link">EcoFriendly</Link>
+                        <Link to="/" className="nav-link">Acerca de nosotros</Link>
                         <strong><li onClick={handleShow} style={{ cursor: "pointer", color: "gray" }}>Términos y Condiciones</li></strong>
                     </ul>
                 </div>
@@ -73,10 +75,7 @@ export const Footer = () => {
                     </ul>
                 </div>
             </div>
-
-        </div>
-        <Modal show={showModal} handleClose={handleClose} />
-        <div className="row">
+            <div className="row">
             <div className="col-lg-12 d-flex justify-content-center">
                 <p className="ms-3 me-3">Hecho con pasión por Jean Pool, Ricardo y Manuel © Primer proyecto colaborativo <strong>Crea Tu Tee</strong> 2024.</p>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-car-front-fill" viewBox="0 0 16 16">
@@ -85,6 +84,8 @@ export const Footer = () => {
 
             </div>
         </div>
+        </div>
+        <Modal show={showModal} handleClose={handleClose} />
     </footer>
     );
 };
