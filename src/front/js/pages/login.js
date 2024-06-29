@@ -14,7 +14,7 @@ const Login = () => {
             const isAuthenticated = await actions.login({ email, password });
             
             if (isAuthenticated) {
-                navigate('/home'); // Redirige a la página principal o a la ruta deseada después del login
+                navigate('/'); // Redirige a la página principal o a la ruta deseada después del login
             } else {
                 console.log("Login failed"); // Manejar caso de login fallido si es necesario
             }

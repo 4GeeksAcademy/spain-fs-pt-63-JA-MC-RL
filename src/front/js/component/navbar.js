@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import creatutee2 from "../../img/creatutee2.jpg";
-import './../../styles/navbar.css';
 import { FaShoppingCart } from "react-icons/fa";
+import "./../../styles/navbar.css";
 
 export const Navbar = () => {
   const token = localStorage.getItem('token');
@@ -14,8 +14,8 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light w-100">
-      <div className="container w-100">
+    <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+      <div className="container">
         <div className="navbar-left ms-5">
           <Link to="/" className="navbar-brand">
             <img src={creatutee2} alt="CreaTuTee" className="navbar-logo" />
@@ -35,20 +35,20 @@ export const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarContent">
           <ul className="navbar-nav mx-auto navbar-center">
-            <li className="nav-item">
-              <Link to="/home" className="nav-link">Inicio</Link>
+            <li className="nav-item cuadro">
+              <Link to="/" className="nav-link">Inicio</Link>
             </li>
             <li className="nav-item">
               <a href="./desing" className="nav-link">DiseñaTuTee</a>
             </li>
             <li className="nav-item">
-              <a href="#how-it-works" className="nav-link">Cómo funciona</a>
+              <a href="#comofunciona" className="nav-link">Como funciona</a>
             </li>
             <li className="nav-item">
-              <a href="#eco-friendly" className="nav-link">EcoFriendly</a>
+              <a href="#ecofriendly" className="nav-link">EcoFriendly</a>
             </li>
             <li className="nav-item">
-              <a href="#about-us" className="nav-link">Acerca de nosotros</a>
+              <a href="#acercadenosotros" className="nav-link">Acerca de nosotros</a>
             </li>
           </ul>
           <ul className="navbar-nav ml-auto navbar-right">

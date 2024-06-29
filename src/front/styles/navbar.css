@@ -1,9 +1,13 @@
 .navbar {
     width: 100%;
     background-color: #ddeeff;
+    position: sticky;
+    top: 0;
+    width: 100%;
 }
 
 .navbar .container {
+    
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -38,7 +42,7 @@
 }
 
 .navbar-logo {
-    max-height: 70px; 
+    max-height: 40px; 
     margin-right: 10px;
 }
 
@@ -60,7 +64,7 @@
 }
 
 .nav-link:hover {
-    color: #9bf8c2;
+    color: #034cf8;
 }
 
 .btn {
@@ -105,19 +109,16 @@
   .carrito-button:hover {
     color: #3c9ccc; 
   }
-  
-  /* Archivo: navbar.css */
+  .custom-nav-item .custom-nav-link {
+    color: #000;
+    transition: background-color 0.3s, color 0.3s, border-radius 0.3s, transform 0.3s;
+    border-radius: 5px;
+}
 
-/* Estilo para el estado normal */
-.custom-nav-item .custom-nav-link {
-    color: #000; 
-    transition: background-color 0.01s, color 0.01s; 
-  }
-  
-  /* Estilo para el estado hover */
-  .custom-nav-item .custom-nav-link:hover {
-    background-color: #bee73a; /* Fondo al pasar el cursor */
+.custom-nav-item .custom-nav-link:hover {
+    background-color: #034cf8; /* Fondo al pasar el cursor */
     color: #fff; /* Color del texto al pasar el cursor */
-    border-radius: 10px;
-  }
+    border-radius: 10px; /* Aumentamos el radio del borde para un efecto más suave */
+    transform: scale(1.1); /* Efecto de escala al pasar el cursor */
+}
   
