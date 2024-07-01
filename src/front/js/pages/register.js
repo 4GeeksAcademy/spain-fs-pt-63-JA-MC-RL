@@ -42,8 +42,9 @@ const Register = () => {
     };
 
     return (
+        <body className="contenedor">
         <div className="register-container">
-            <h1>Register</h1>
+            <h1 className="login-title">Registro</h1>
             <input 
                 name="email" 
                 value={email} 
@@ -114,8 +115,9 @@ const Register = () => {
                 onChange={(e) => setAddress2(e.target.value)} 
                 placeholder="Address 2" 
             />
-            <button onClick={handleRegister}>Register</button>
+            <button onClick={handleRegister}>Registro</button>
         </div>
+        </body>
     );
 };
 

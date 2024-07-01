@@ -162,8 +162,9 @@ const Design = () => {
                       </button>
                       <button
                         className={`color-option ${selectedColor === 'WHITE' ? 'active' : ''}`}
-                        style={{ backgroundColor: 'white' }}
+                        style={{ backgroundColor: 'white', border: '1px solid black' }}
                         onClick={() => handleColorChange('WHITE')}
+
                       >
                       </button>
                       <button
@@ -180,10 +181,26 @@ const Design = () => {
                       </button>
                     </div>
                   </div>
-                  <div className='mt-4'>
-                    <button className=" btn btn-primary mx-1" onClick={() => handleProductSelect(product)} type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Diseña AQUI</button>
-                    <button onClick={addToCart} disabled={!selectedProduct}>Agregar al Carrito</button>
-                  </div>
+                  <div className="mt-4 d-flex align-items-center justify-content-center">
+  <button
+    className="btn btn-primary mx-1"
+    onClick={() => handleProductSelect(product)}
+    type="button"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+  >
+    Diseña AQUI
+  </button>
+  <button
+    className="btn btn-secondary mx-1"
+    onClick={addToCart}
+    disabled={!selectedProduct}
+  >
+    Agregar al Carrito
+  </button>
+</div>
+
+
                 </div>
               </div>
             </div>

@@ -1,7 +1,7 @@
 .product-card {
     display: flex;
     justify-content: space-evenly;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #ffffff;
     padding: 10px;
     text-align: center;
     min-height: 500px;
@@ -112,3 +112,5 @@
     background-color: #ccc;
     cursor: not-allowed;
   }
+
+  
