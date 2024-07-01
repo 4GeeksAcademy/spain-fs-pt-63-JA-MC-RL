@@ -57,63 +57,63 @@ const Register = () => {
                 type="password" 
                 value={password} 
                 onChange={(e) => setPassword(e.target.value)} 
-                placeholder="Password" 
+                placeholder="Contraseña" 
                 required
             />
             <input 
                 name="firstName" 
                 value={firstName} 
                 onChange={(e) => setFirstName(e.target.value)} 
-                placeholder="First Name" 
+                placeholder="Nombre" 
                 required
             />
             <input 
                 name="lastName" 
                 value={lastName} 
                 onChange={(e) => setLastName(e.target.value)} 
-                placeholder="Last Name" 
+                placeholder="Apellidos" 
                 required
             />
             <input 
                 name="phoneNumber" 
                 value={phoneNumber} 
                 onChange={(e) => setPhoneNumber(e.target.value)} 
-                placeholder="Phone Number" 
+                placeholder="Numero de telefono" 
                 required
             />
             <input 
                 name="city" 
                 value={city} 
                 onChange={(e) => setCity(e.target.value)} 
-                placeholder="City" 
+                placeholder="Ciudad" 
                 required
             />
             <input 
                 name="country" 
                 value={country} 
                 onChange={(e) => setCountry(e.target.value)} 
-                placeholder="Country" 
+                placeholder="Pais" 
                 required
             />
             <input 
                 name="postalCode" 
                 value={postalCode} 
                 onChange={(e) => setPostalCode(e.target.value)} 
-                placeholder="Postal Code" 
+                placeholder="Codigo Postal" 
                 required
             />
             <input 
                 name="address1" 
                 value={address1} 
                 onChange={(e) => setAddress1(e.target.value)} 
-                placeholder="Address 1" 
+                placeholder="Dirección 1" 
                 required
             />
             <input 
                 name="address2" 
                 value={address2} 
                 onChange={(e) => setAddress2(e.target.value)} 
-                placeholder="Address 2" 
+                placeholder="Dirección 2 (opcional)" 
             />
             <button onClick={handleRegister}>Registro</button>
         </div>

@@ -25,7 +25,7 @@ const Login = () => {
 
     return (
         <div className="login-container">
-            <h1 className="login-title">Login</h1>
+            <h1 className="login-title">Iniciar sesión</h1>
             <form className="login-form">
     <input
         type="email"
@@ -40,7 +40,7 @@ const Login = () => {
         name="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
+        placeholder="Contraseña"
         className="login-input"
     />
     <button type="button" onClick={handleLogin} className="login-button">Entrar</button>
