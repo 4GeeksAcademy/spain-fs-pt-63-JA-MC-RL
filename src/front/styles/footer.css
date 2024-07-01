@@ -2,3 +2,8 @@
     background-color: #ffffff; 
     border-top: 1px solid #ddd;
 }
+
+.small-img {
+    width: 200px;
+    margin-left: 50px;
+}

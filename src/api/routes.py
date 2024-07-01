@@ -7,7 +7,7 @@ import os
 
 api = Blueprint('api', __name__)
 # Allow CORS requests to this API
-CORS(api, resources={r"/*": {"origins": ["https://zany-capybara-pjrgqqv45w74frxr9-3001.app.github.dev", "https://zany-capybara-pjrgqqv45w74frxr9-3000.app.github.dev"]}})
+CORS(api, resources={r"/*": {"origins": ["https://upgraded-umbrella-g46475gvp6xf54v-3001.app.github.dev", "https://upgraded-umbrella-g46475gvp6xf54v-3001.app.github.dev"]}})
 @api.after_request
 def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
