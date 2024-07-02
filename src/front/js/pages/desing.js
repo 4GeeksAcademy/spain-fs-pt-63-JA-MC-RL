@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Context } from './../store/appContext';
+import { Offcanvas, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./../../styles/desing.css";
 
 const Design = () => {
@@ -13,6 +15,7 @@ const Design = () => {
   const [selectedDescription, setSelectedDescription] = useState('Description default');
   const [selectedPrice, setSelectedPrice] = useState('00.00');
   const [selectedCustomImage, setSelectedCustomImage] = useState(null);
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
   const navigate = useNavigate();
 
   const initialProducts = [
@@ -56,6 +59,7 @@ const Design = () => {
 
   useEffect(() => {
     setProducts(initialProducts);
+    setSelectedProduct(initialProducts[0]);
     setSelectedPrice(initialProducts[0].sizes[selectedSize].price);
     actions.fetchCustomImages();
   }, [actions, selectedSize]);
@@ -81,6 +85,7 @@ const Design = () => {
 
   const handleCustomImage = (url) => {
     setSelectedCustomImage(url);
+    setShowOffcanvas(false);  // Close offcanvas after selecting an image
   };
 
   const addToCart = () => {
@@ -97,22 +102,22 @@ const Design = () => {
     }
   };
 
+  const toggleOffcanvas = () => setShowOffcanvas(!showOffcanvas);
+
   return (
     <div className="design-view">
-      <div className='d-flex'>
-        <h1 className='title'>Diseña tu camiseta</h1>
-      </div>
-      <div className="product-list">
+      <h1 className="title text-center">Diseña tu camiseta</h1>
+      <div className="product-list d-flex justify-content-center">
         {products.map(product => (
           <React.Fragment key={product.id}>
             <div className="product-card">
-              <div className='cont-product'>
-                <div className='cont-product-images'>
-                  <div className="image-container">
+              <div className="cont-product">
+                <div className="cont-product-images">
+                  <div className="image-container position-relative">
+                    <img className="product-img-detail" src={product.image_urls[selectedColor]} alt={product.name} />
                     {selectedCustomImage && (
                       <img className="custom-img-detail" src={selectedCustomImage} alt="Custom Design" />
                     )}
-                    <img className="product-img-detail" src={product.image_urls[selectedColor]} alt={product.name} />
                   </div>
                 </div>
               </div>
@@ -120,7 +125,7 @@ const Design = () => {
                 <div className='cont-prod-details'>
                   <h1>{product.name}</h1>
                   <p>Descripción: {product.description}</p>
-                  <p>Precio: <span className='price'>${selectedPrice}</span></p>
+                  <p>Precio: <span className='price'>{selectedPrice}€</span></p>
                   <p>
                     Talla:
                     <select className='mx-2' value={selectedSize} onChange={(e) => handleSizeChange(e.target.value)}>
@@ -180,31 +185,9 @@ const Design = () => {
                       </button>
                     </div>
                   </div>
-                  <div className='mt-4'>
-                    <button className=" btn btn-primary mx-1" onClick={() => handleProductSelect(product)} type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Diseña AQUI</button>
-                    <button onClick={addToCart} disabled={!selectedProduct}>Agregar al Carrito</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div className="modal-dialog modal-lg">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h1 className="modal-title fs-5" id="exampleModalLabel">Selecciona una imagen personalizada</h1>
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div className="modal-body">
-                    <div className="custom-image-list">
-                      {store.customImages.map((url, index) => (
-                        <button key={index} onClick={() => handleCustomImage(url)} className='btn-select-custom-img'>
-                          <img src={url} alt={`Custom ${index}`} />
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <div className='mt-4 d-flex justify-content-around'>
+                    <Button onClick={addToCart} disabled={!selectedProduct}>Agregar al carrito</Button>
+                    <Button variant="primary" onClick={toggleOffcanvas}>Escoge el diseño</Button>
                   </div>
                 </div>
               </div>
@@ -212,20 +195,28 @@ const Design = () => {
           </React.Fragment>
         ))}
       </div>
-      <div className="accordion" id="accordionExample">
-        <div className="accordion-item">
-          <h2 className="accordion-header">
-            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Accordion Item #1
-            </button>
-          </h2>
-          <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-            <div className="accordion-body">
-              <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-            </div>
+      <Offcanvas show={showOffcanvas} onHide={toggleOffcanvas} placement="end">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Selecciona una imagen personalizada</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <div className="custom-image-list">
+            {store.customImages && store.customImages.length > 0 ? (
+              store.customImages.map((image, index) => (
+                <button
+                  key={index}
+                  className="btn-select-custom-img"
+                  onClick={() => handleCustomImage(image)}
+                >
+                  <img src={image} alt={`Custom ${index + 1}`} />
+                </button>
+              ))
+            ) : (
+              <p>No custom images available</p>
+            )}
           </div>
-        </div>
-      </div>
+        </Offcanvas.Body>
+      </Offcanvas>
     </div>
   );
 };
