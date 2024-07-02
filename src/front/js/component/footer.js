@@ -22,8 +22,6 @@ export const Footer = () => {
 
     return (
         <footer id="footer" className="footer-custom">
-            <div className="line-separator1"></div>
-
             <div className="container-fluid logocrea">
                 <div className="row">
                     <div className="col-md-3 col-sm-6 mt-2">
@@ -62,7 +60,7 @@ export const Footer = () => {
                     </div>
                     <div className="col-md-3 col-sm-6 mt-3">
                         <u><strong><h4>Síguenos:</h4></strong></u>
-                        <ul className="list-unstyled">
+                        <ul className="list-unstyled d-flex">
                             <p className="pago me-3 mt-2">
                                 <TiSocialTwitter size={27} style={{ color: 'gray' }} />
                             </p>
@@ -77,7 +75,7 @@ export const Footer = () => {
                 </div>
                 <div className="row">
                     <div className="col-lg-12 d-flex justify-content-center">
-                        <p className="ms-3 me-3">Hecho con pasión por Jean Pool, Ricardo y Manuel © Primer proyecto colaborativo <strong>Crea Tu Tee</strong> 2024.</p>
+                        <p className="ms-3 me-3">Hecho con pasión por Jean Pool, Ricardo y Manuel © Primer proyecto colaborativo <strong>CreaTuTee</strong> 2024.</p>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-car-front-fill" viewBox="0 0 16 16">
 
                         </svg>
