@@ -47,7 +47,7 @@ const Checkout = () => {
 
     return (
         <div className="checkout-view">
-            <h1>Checkout</h1>
+            <h1>Tramitar Pedido</h1>
             {checkoutItems.length === 0 ? (
                 <p>No hay productos en el carrito</p>
             ) : (
