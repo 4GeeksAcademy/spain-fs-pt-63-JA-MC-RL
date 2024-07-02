@@ -4,10 +4,9 @@
     align-items: center;
     justify-content: center;
     min-height: 100%;
-    background: linear-gradient(135deg, #ac7272, #ddeeff);
     font-family: Roboto, sans-serif;
     padding: 50px;
-    color: #fff;
+    color: #161616;
 }
 
 .profile-container h1 {
@@ -18,10 +17,10 @@
 .profile-form {
     width: 100%;
     max-width: 800px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #f9f9f9;
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 4px #706c6cda;
     box-sizing: border-box;
     backdrop-filter: blur(10px);
 }
@@ -44,7 +43,7 @@
 .label {
     font-weight: bold;
     font-size: 1.2rem;
-    color: #fff;
+    color: #0f0f0f;
     margin-bottom: 5px;
 }
 
@@ -76,12 +75,17 @@
     width: 150px;
     padding: 12px;
     font-size: 1rem;
-    background-color: #3f7185;
+    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
+    
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
 }
 
 .profile-button {
